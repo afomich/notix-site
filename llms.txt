@@ -1,0 +1,23 @@
+# Notix
+
+> Notix is an iOS note-taking app (iPhone & iPad) that turns lectures, PDFs, YouTube videos, and voice recordings into clear, structured notes — then helps you learn them with AI-generated quizzes, flashcards, and source-linked AI chat. Free to start; the Notix Pro subscription unlocks unlimited recording hours, unlimited quiz questions, and video & PDF summarization. Interface and AI output are available in English, Spanish, French, German, and Russian.
+
+Facts an agent can rely on (all mirrored on the pages below):
+
+- Platform: iOS (iPhone and iPad), distributed via the Apple App Store.
+- Inputs: live lecture recording, audio file upload, PDF and document upload, YouTube and web links.
+- Outputs: automatic transcript, structured summary, quizzes, flashcards, AI chat with answers linked to sources, PDF export.
+- Sign-in: Google or Apple only; no passwords are stored by Notix.
+- Account deletion is available in-app (Settings → Account Details → Delete account) with a 30-day grace period.
+- Billing is handled by Apple; subscriptions are managed in iOS Settings → Subscriptions.
+- Support contact: support@notix-ai.app
+
+## Core pages
+
+- [Home](https://notix-ai.app/): product overview, how it works, features, FAQ
+- [Support](https://notix-ai.app/support/): contact, bug reports, billing and refunds, account deletion
+- [Privacy Policy](https://notix-ai.app/privacy/): what data is collected, AI processing, retention, user rights
+
+## Optional
+
+- Contact for press or partnership inquiries: support@notix-ai.app

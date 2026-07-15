@@ -1,5 +1,6 @@
 :root {
   --brand: #0d5fff;
+  --brand-text: #0d5fff;
   --brand-dark: #0a4cd0;
   --bg: #ffffff;
   --bg-soft: #f4f6fb;
@@ -11,6 +12,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    /* lightened brand for TEXT on dark backgrounds — #0d5fff is only 3.7:1 there */
+    --brand-text: #4d8dff;
     --bg: #0e1017;
     --bg-soft: #161927;
     --text: #f2f4fa;
@@ -47,7 +50,7 @@ header {
   text-decoration: none;
 }
 
-.logo span { color: var(--brand); }
+.logo span { color: var(--brand-text); }
 
 nav a {
   color: var(--text-soft);
@@ -56,7 +59,7 @@ nav a {
   margin-left: 24px;
 }
 
-nav a:hover { color: var(--brand); }
+nav a:hover { color: var(--brand-text); }
 
 .hero { text-align: center; padding: 88px 0 64px; }
 
@@ -69,7 +72,7 @@ nav a:hover { color: var(--brand); }
   margin: 0 auto 20px;
 }
 
-.hero h1 em { color: var(--brand); font-style: normal; }
+.hero h1 em { color: var(--brand-text); font-style: normal; }
 
 .hero p {
   font-size: 19px;
@@ -117,7 +120,7 @@ nav a:hover { color: var(--brand); }
   letter-spacing: 1.5px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--brand);
+  color: var(--brand-text);
   text-align: center;
   margin-bottom: 10px;
 }
@@ -266,7 +269,7 @@ nav a:hover { color: var(--brand); }
   position: absolute;
   right: 0;
   top: 0;
-  color: var(--brand);
+  color: var(--brand-text);
   font-size: 22px;
   font-weight: 400;
   line-height: 1;
@@ -309,7 +312,7 @@ main.page p, main.page li { color: var(--text); font-size: 16px; margin-bottom: 
 
 main.page ul { padding-left: 22px; margin-bottom: 16px; }
 
-main.page a { color: var(--brand); }
+main.page a { color: var(--brand-text); }
 
 .contact-card {
   background: var(--bg-soft);
@@ -332,4 +335,4 @@ footer {
 
 footer a { color: var(--text-soft); text-decoration: none; margin-right: 20px; }
 
-footer a:hover { color: var(--brand); }
+footer a:hover { color: var(--brand-text); }
