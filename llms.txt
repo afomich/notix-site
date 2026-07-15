@@ -4,7 +4,7 @@
 
 Facts an agent can rely on (all mirrored on the pages below):
 
-- Platform: iOS (iPhone and iPad), distributed via the Apple App Store.
+- Platform: iOS (iPhone and iPad). App Store: https://apps.apple.com/app/id6758561284
 - Inputs: live lecture recording, audio file upload, PDF and document upload, YouTube and web links.
 - Outputs: automatic transcript, structured summary, quizzes, flashcards, AI chat with answers linked to sources, PDF export.
 - Sign-in: Google or Apple only; no passwords are stored by Notix.
