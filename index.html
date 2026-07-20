@@ -10,13 +10,14 @@
   <meta property="og:url" content="https://notix-ai.app">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://notix-ai.app/">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0e1017" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#010206">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="icon" href="favicon-96.png" type="image/png" sizes="96x96">
   <link rel="icon" href="favicon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
+  <script src="site.js" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -47,213 +48,280 @@
   </script>
 </head>
 <body>
-  <header>
-    <div class="container header-inner">
-      <a class="logo" href="./">Notix<span>.</span></a>
-      <nav>
-        <a href="#features">Features</a>
-        <a href="#faq">FAQ</a>
+<div class="page">
+  <div class="glow" aria-hidden="true">
+    <div class="glow-a"></div>
+    <div class="glow-b"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="./">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-name">Notix</span>
+      </a>
+      <nav class="site-nav">
+        <a href="#features" class="nav-hide-mobile">Features</a>
+        <a href="#faq" class="nav-hide-mobile">FAQ</a>
         <a href="support/">Support</a>
+        <a class="pill-btn" href="https://apps.apple.com/app/id6758561284">Get the app</a>
       </nav>
     </div>
   </header>
 
-  <main>
-  <!-- 1. Hero -->
-  <section class="hero">
-    <div class="container">
-      <h1>Turn anything you're learning into notes that <em>teach you back</em></h1>
-      <p>Record a lecture, upload a PDF, or paste a YouTube link. Notix transcribes it, writes a clean summary, and turns it into quizzes and flashcards — so you study instead of re-reading.</p>
-      <a class="cta" href="https://apps.apple.com/app/id6758561284">Download on the App Store</a>
-      <span class="cta-note">Free to start · iPhone</span>
-    </div>
-  </section>
+  <main class="z1">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-wrap">
+        <div class="hero-text">
+          <div class="badge"><span class="badge-dot" aria-hidden="true"></span>AI study companion for iPhone</div>
+          <h1>Turn anything you're learning into notes that <em>teach you back</em></h1>
+          <p class="hero-sub">Record a lecture, upload a PDF, or paste a YouTube link. Notix transcribes it, writes a clean summary, and turns it into quizzes and flashcards — so you study instead of re-reading.</p>
+          <div class="hero-cta">
+            <a class="btn-primary" href="https://apps.apple.com/app/id6758561284">Download on the App Store</a>
+            <span class="cta-note">Free to start · iPhone</span>
+          </div>
+        </div>
+        <div class="phone-col" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-island"></div>
+              <div class="phone-status">
+                <span>9:41</span>
+                <span class="phone-status-right">
+                  <span class="signal"><span style="height:4px"></span><span style="height:6px"></span><span style="height:8px"></span><span style="height:10px"></span></span>
+                  <span class="battery"><span></span></span>
+                </span>
+              </div>
+              <div class="phone-title-row">
+                <span class="phone-title">My notes</span>
+                <span class="im" style="--icon:url('assets/icons/menu_dots_circle.svg');width:24px;height:24px;background:#D8D8D8"></span>
+              </div>
+              <div class="phone-chips">
+                <div class="chip">
+                  <span class="im" style="--icon:url('assets/icons/folder.svg');width:17px;height:17px;background:#A5BDFF"></span>
+                  <span class="chip-text"><span class="chip-name">All notes</span><span class="chip-meta">12 notes</span></span>
+                </div>
+                <div class="chip selected">
+                  <span class="im" style="--icon:url('assets/icons/folder.svg');width:17px;height:17px;background:#A5BDFF"></span>
+                  <span class="chip-text"><span class="chip-name">Folder poetry</span><span class="chip-meta">7 notes</span></span>
+                </div>
+              </div>
+              <div class="phone-list">
+                <span class="phone-section">Today</span>
+                <div class="note-card">
+                  <span class="im" style="--icon:url('assets/icons/play.svg');width:19px;height:19px;background:#A5BDFF"></span>
+                  <span class="note-text"><span class="note-title">New recording or uploaded audio</span><span class="note-meta">26 seconds</span></span>
+                </div>
+                <div class="note-card">
+                  <span class="im" style="--icon:url('assets/icons/document.svg');width:19px;height:19px;background:#A5BDFF"></span>
+                  <span class="note-text"><span class="note-title">Text note, uploaded document, link, video</span><span class="note-meta">10:34</span></span>
+                </div>
+                <span class="phone-section">Previous 30 days</span>
+                <div class="note-card">
+                  <span class="im" style="--icon:url('assets/icons/play.svg');width:19px;height:19px;background:#A5BDFF"></span>
+                  <span class="note-text"><span class="note-title">New recording or uploaded audio</span><span class="note-meta">27 Jan 2026, 26 seconds</span></span>
+                </div>
+                <div class="note-card">
+                  <span class="im" style="--icon:url('assets/icons/document.svg');width:19px;height:19px;background:#A5BDFF"></span>
+                  <span class="note-text"><span class="note-title">Text note, uploaded document, link, video</span><span class="note-meta">27 Jan 2026</span></span>
+                </div>
+              </div>
+              <div class="phone-nav">
+                <span class="im" style="--icon:url('assets/icons/magnifer.svg');width:21px;height:21px;background:#D8D8D8"></span>
+                <span class="im" style="--icon:url('assets/icons/chat.svg');width:21px;height:21px;background:#D8D8D8"></span>
+                <span class="phone-fab">+</span>
+                <span class="im" style="--icon:url('assets/icons/folder_plus.svg');width:21px;height:21px;background:#D8D8D8"></span>
+                <span class="im" style="--icon:url('assets/icons/settings.svg');width:21px;height:21px;background:#D8D8D8"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- 2. Value strip -->
-  <section class="value-strip">
-    <div class="container value-strip-inner">
-      <div><strong>Anything in</strong><br>audio, PDF, YouTube, web</div>
-      <div><strong>Notes in seconds</strong><br>transcript + clean summary</div>
-      <div><strong>Active recall out</strong><br>quizzes, flashcards, AI chat</div>
-      <div><strong>5 languages</strong><br>EN · ES · FR · DE · RU</div>
-    </div>
-  </section>
+    <!-- Value strip -->
+    <section class="section-tight" data-reveal>
+      <div class="container value-grid" style="padding:0">
+        <div class="value-card"><strong>Anything in</strong><span>audio, PDF, YouTube, web</span></div>
+        <div class="value-card"><strong>Notes in seconds</strong><span>transcript + clean summary</span></div>
+        <div class="value-card"><strong>Active recall out</strong><span>quizzes, flashcards, AI chat</span></div>
+        <div class="value-card"><strong>5 languages</strong><span>EN · ES · FR · DE · RU</span></div>
+      </div>
+    </section>
 
-  <!-- 3. Pain section -->
-  <section class="pains">
-    <div class="container">
-      <p class="eyebrow">Sound familiar?</p>
-      <h2>Studying feels harder than it should</h2>
-      <div class="pain-grid">
-        <div class="pain">
-          <p>“I zone out twenty minutes into the lecture — and miss the half that's on the exam.”</p>
+    <!-- Pains -->
+    <section class="section pains" data-reveal>
+      <div class="container" style="padding:0">
+        <p class="eyebrow">Sound familiar?</p>
+        <h2>Studying feels harder than it should</h2>
+        <div class="pain-grid">
+          <div class="pain"><p>“I zone out twenty minutes into the lecture — and miss the half that's on the exam.”</p></div>
+          <div class="pain"><p>“I've read this chapter three times and I still can't remember any of it.”</p></div>
+          <div class="pain"><p>“My notes are scattered across two notebooks and five different apps.”</p></div>
+          <div class="pain"><p>“It's midnight before the exam, I'm confused, and there's no one to ask.”</p></div>
         </div>
-        <div class="pain">
-          <p>“I've read this chapter three times and I still can't remember any of it.”</p>
-        </div>
-        <div class="pain">
-          <p>“My notes are scattered across two notebooks and five different apps.”</p>
-        </div>
-        <div class="pain">
-          <p>“It's midnight before the exam, I'm confused, and there's no one to ask.”</p>
-        </div>
+        <p class="pivot">There's a better way. Notix turns lectures, PDFs, and videos into a study system — automatically.</p>
       </div>
-      <p class="pivot">There's a better way. Notix turns lectures, PDFs, and videos into a study system — automatically.</p>
-    </div>
-  </section>
+    </section>
 
-  <!-- 4. How it works -->
-  <section class="how" id="how">
-    <div class="container">
-      <h2>How it works — it's simple</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <h3>Capture anything</h3>
-          <p>Record a lecture, upload audio or a document, or paste a YouTube or web link.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <h3>Notix does the work</h3>
-          <p>Automatic transcription and a clean, structured summary — ready in seconds.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <h3>Learn it for real</h3>
-          <p>Test yourself with quizzes and flashcards, or ask your notes anything with AI Chat.</p>
+    <!-- How it works -->
+    <section class="section" id="how" data-reveal>
+      <div class="container" style="padding:0">
+        <h2 class="h2-center">How it works — it's simple</h2>
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">1</span>
+            <h3>Capture anything</h3>
+            <p>Record a lecture, upload audio or a document, or paste a YouTube or web link.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">2</span>
+            <h3>Notix does the work</h3>
+            <p>Automatic transcription and a clean, structured summary — ready in seconds.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">3</span>
+            <h3>Learn it for real</h3>
+            <p>Test yourself with quizzes and flashcards, or ask your notes anything with AI Chat.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 5. Features -->
-  <section class="container features" id="features">
-    <h2 class="features-title">Capture, understand, and remember — in one app</h2>
-    <div class="feature-grid">
-      <div class="feature">
-        <div class="icon">🎙️</div>
-        <h3>Never miss a thing in class</h3>
-        <p>Tap record and stay present. The transcript and structured notes are waiting for you after the lecture.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">📄</div>
-        <h3>Fifty slides, one clear summary</h3>
-        <p>Drop in PDFs, slides, or articles and get a clean, structured summary in seconds.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">▶️</div>
-        <h3>YouTube &amp; web links</h3>
-        <p>Paste a link and Notix turns the video or page into searchable notes.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🎯</div>
-        <h3>Find your gaps before the exam does</h3>
-        <p>Turn any note into practice questions — active recall beats re-reading every time.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🃏</div>
-        <h3>Make it stick</h3>
-        <p>Flashcards generated straight from your notes, ready for quick review anywhere.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">💬</div>
-        <h3>Your notes, answering back</h3>
-        <p>Ask questions about one note or your whole library — every answer links to its source.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🗂️</div>
-        <h3>Everything in one place</h3>
-        <p>Folders, search, and sync across devices — find any fact from any lecture in seconds.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🌍</div>
-        <h3>Speaks your language</h3>
-        <p>English, Spanish, French, German, and Russian — summaries and quizzes follow your language.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">📤</div>
-        <h3>Share it as a PDF</h3>
-        <p>Export any note as a polished PDF for classmates or colleagues.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. Testimonials -->
-  <section class="testimonials">
-    <div class="container">
-      <h2>What students say about Notix</h2>
-      <div class="testimonial-grid">
-        <div class="testimonial">
-          <div class="stars">★★★★★</div>
-          <p>“I record every lecture and Notix turns it into clean notes I actually study from. My grades went up this semester.”</p>
-          <div class="author">Maya R. · Student</div>
-        </div>
-        <div class="testimonial">
-          <div class="stars">★★★★★</div>
-          <p>“Reviewing before exams is so much faster now. I just search my notes instead of rewatching hours of recordings.”</p>
-          <div class="author">Daniel K. · Student</div>
-        </div>
-        <div class="testimonial">
-          <div class="stars">★★★★★</div>
-          <p>“Perfect for back-to-back classes. I tap record, focus on the lecture, and the summary is waiting for me afterwards.”</p>
-          <div class="author">Priya S. · Student</div>
+    <!-- Features -->
+    <section class="section" id="features" data-reveal>
+      <div class="container" style="padding:0">
+        <h2 class="h2-center">Capture, understand, and remember — in one app</h2>
+        <div class="feature-grid">
+          <div class="feature">
+            <span class="im" style="--icon:url('assets/icons/microphone.svg')" aria-hidden="true"></span>
+            <h3>Never miss a thing in class</h3>
+            <p>Tap record and stay present. The transcript and structured notes are waiting for you after the lecture.</p>
+          </div>
+          <div class="feature">
+            <span class="im" style="--icon:url('assets/icons/document.svg')" aria-hidden="true"></span>
+            <h3>Fifty slides, one clear summary</h3>
+            <p>Drop in PDFs, slides, or articles and get a clean, structured summary in seconds.</p>
+          </div>
+          <div class="feature">
+            <span class="im" style="--icon:url('assets/icons/play.svg')" aria-hidden="true"></span>
+            <h3>YouTube &amp; web links</h3>
+            <p>Paste a link and Notix turns the video or page into searchable notes.</p>
+          </div>
+          <div class="feature">
+            <span class="im" style="--icon:url('assets/icons/check.svg')" aria-hidden="true"></span>
+            <h3>Find your gaps before the exam does</h3>
+            <p>Turn any note into practice questions — active recall beats re-reading every time.</p>
+          </div>
+          <div class="feature">
+            <span class="im" style="--icon:url('assets/icons/flashcard.svg')" aria-hidden="true"></span>
+            <h3>Make it stick</h3>
+            <p>Flashcards generated straight from your notes, ready for quick review anywhere.</p>
+          </div>
+          <div class="feature">
+            <span class="im" style="--icon:url('assets/icons/chat.svg')" aria-hidden="true"></span>
+            <h3>Your notes, answering back</h3>
+            <p>Ask questions about one note or your whole library — every answer links to its source.</p>
+          </div>
+          <div class="feature">
+            <span class="im" style="--icon:url('assets/icons/folder_plus.svg')" aria-hidden="true"></span>
+            <h3>Everything in one place</h3>
+            <p>Folders, search, and sync across devices — find any fact from any lecture in seconds.</p>
+          </div>
+          <div class="feature">
+            <span class="im" style="--icon:url('assets/icons/globus.svg')" aria-hidden="true"></span>
+            <h3>Speaks your language</h3>
+            <p>English, Spanish, French, German, and Russian — summaries and quizzes follow your language.</p>
+          </div>
+          <div class="feature">
+            <span class="im" style="--icon:url('assets/icons/export.svg')" aria-hidden="true"></span>
+            <h3>Share it as a PDF</h3>
+            <p>Export any note as a polished PDF for classmates or colleagues.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 7. FAQ -->
-  <section class="faq" id="faq">
-    <div class="container">
-      <h2>Frequently Asked Questions</h2>
-      <details>
-        <summary>How do I record a lecture and turn it into notes?</summary>
-        <p>Tap the + button, choose “Record or upload audio”, and hit record. When the lecture ends, Notix transcribes the recording and generates a clean, structured summary automatically. You can also upload an existing audio file.</p>
-      </details>
-      <details>
-        <summary>Can I turn PDF textbooks and slides into summaries?</summary>
-        <p>Yes. Upload any PDF or document and Notix produces a structured summary you can search, quiz yourself on, or turn into flashcards.</p>
-      </details>
-      <details>
-        <summary>Can I make notes from YouTube videos?</summary>
-        <p>Yes. Paste a YouTube or web link and Notix turns the video or article into notes, quizzes, and flashcards.</p>
-      </details>
-      <details>
-        <summary>Is Notix free?</summary>
-        <p>Notix is free to start — you can create notes, quizzes, and flashcards without paying. Notix Pro unlocks unlimited recording hours, unlimited quiz questions, and video &amp; PDF summarization with monthly or annual plans.</p>
-      </details>
-      <details>
-        <summary>Is it okay to use Notix at my school?</summary>
-        <p>Notix is a study aid: it helps you capture and review your own course materials. Recording policies differ between schools, so check your institution's rules on recording lectures before you hit record.</p>
-      </details>
-      <details>
-        <summary>What languages does Notix support?</summary>
-        <p>The app is available in English, Spanish, French, German, and Russian — and your summaries and quizzes follow your chosen language.</p>
-      </details>
-    </div>
-  </section>
+    <!-- Testimonials -->
+    <section class="section" data-reveal>
+      <div class="container" style="padding:0">
+        <h2 class="h2-center">What students say about Notix</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>“I record every lecture and Notix turns it into clean notes I actually study from. My grades went up this semester.”</p>
+            <div class="author">Maya R. · Student</div>
+          </div>
+          <div class="testimonial">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>“Reviewing before exams is so much faster now. I just search my notes instead of rewatching hours of recordings.”</p>
+            <div class="author">Daniel K. · Student</div>
+          </div>
+          <div class="testimonial">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>“Perfect for back-to-back classes. I tap record, focus on the lecture, and the summary is waiting for me afterwards.”</p>
+            <div class="author">Priya S. · Student</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- 8. Final CTA -->
-  <section class="final-cta">
-    <div class="container">
-      <h2>Never miss what matters again</h2>
-      <p>Your next lecture could be a set of clean notes, a quiz, and a deck of flashcards — automatically.</p>
-      <a class="cta" href="https://apps.apple.com/app/id6758561284">Download on the App Store</a>
-      <span class="cta-note">Free to start · iPhone</span>
-    </div>
-  </section>
+    <!-- FAQ -->
+    <section class="section" id="faq" data-reveal>
+      <div class="faq-wrap">
+        <h2 class="h2-center">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary><span class="faq-q">How do I record a lecture and turn it into notes?</span><span class="faq-c" aria-hidden="true">+</span></summary>
+            <div class="faq-a"><div><p>Tap the + button, choose “Record or upload audio”, and hit record. When the lecture ends, Notix transcribes the recording and generates a clean, structured summary automatically. You can also upload an existing audio file.</p></div></div>
+          </details>
+          <details class="faq-item">
+            <summary><span class="faq-q">Can I turn PDF textbooks and slides into summaries?</span><span class="faq-c" aria-hidden="true">+</span></summary>
+            <div class="faq-a"><div><p>Yes. Upload any PDF or document and Notix produces a structured summary you can search, quiz yourself on, or turn into flashcards.</p></div></div>
+          </details>
+          <details class="faq-item">
+            <summary><span class="faq-q">Can I make notes from YouTube videos?</span><span class="faq-c" aria-hidden="true">+</span></summary>
+            <div class="faq-a"><div><p>Yes. Paste a YouTube or web link and Notix turns the video or article into notes, quizzes, and flashcards.</p></div></div>
+          </details>
+          <details class="faq-item">
+            <summary><span class="faq-q">Is Notix free?</span><span class="faq-c" aria-hidden="true">+</span></summary>
+            <div class="faq-a"><div><p>Notix is free to start — you can create notes, quizzes, and flashcards without paying. Notix Pro unlocks unlimited recording hours, unlimited quiz questions, and video &amp; PDF summarization with monthly or annual plans. No commitment, cancel anytime.</p></div></div>
+          </details>
+          <details class="faq-item">
+            <summary><span class="faq-q">Is it okay to use Notix at my school?</span><span class="faq-c" aria-hidden="true">+</span></summary>
+            <div class="faq-a"><div><p>Notix is a study aid: it helps you capture and review your own course materials. Recording policies differ between schools, so check your institution's rules on recording lectures before you hit record.</p></div></div>
+          </details>
+          <details class="faq-item">
+            <summary><span class="faq-q">What languages does Notix support?</span><span class="faq-c" aria-hidden="true">+</span></summary>
+            <div class="faq-a"><div><p>The app is available in English, Spanish, French, German, and Russian — and your summaries and quizzes follow your chosen language.</p></div></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section-cta" data-reveal>
+      <div class="glow-cta" aria-hidden="true"></div>
+      <div class="final-cta-inner">
+        <h2>Never miss what matters again</h2>
+        <p>Your next lecture could be a set of clean notes, a quiz, and a deck of flashcards — automatically.</p>
+        <a class="btn-primary" href="https://apps.apple.com/app/id6758561284">Download on the App Store</a>
+        <span class="cta-note">Free to start · iPhone</span>
+      </div>
+    </section>
   </main>
 
-  <!-- 9. Footer -->
-  <footer>
-    <div class="container footer-inner">
-      <div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
         <a href="support/">Support</a>
         <a href="privacy/">Privacy Policy</a>
         <a href="mailto:support@notix-ai.app">support@notix-ai.app</a>
       </div>
-      <div>© 2026 Notix</div>
+      <div class="footer-copy">© 2026 Notix</div>
     </div>
   </footer>
+</div>
 </body>
 </html>
