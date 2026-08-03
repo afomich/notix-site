@@ -1,85 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notix — AI Note Taker: Record Lectures, PDFs &amp; YouTube into Notes, Quizzes &amp; Flashcards</title>
-  <meta name="description" content="Notix turns lectures, PDFs, YouTube videos, and voice recordings into clear notes, quizzes, and flashcards. Transcribe, summarize, and chat with your notes — your AI study companion for iOS.">
-  <meta property="og:title" content="Notix — AI Note Taker">
-  <meta property="og:description" content="Turn lectures, PDFs, and YouTube videos into notes, quizzes, and flashcards. Chat with your notes and get exam-ready faster.">
-  <meta property="og:url" content="https://notix-ai.app">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Notix — AI Note Taker">
-  <link rel="canonical" href="https://notix-ai.app/">
-  <meta name="theme-color" content="#010206">
-  <link rel="icon" href="favicon.ico" sizes="48x48">
-  <link rel="icon" href="favicon-96.png" type="image/png" sizes="96x96">
-  <link rel="icon" href="favicon-192.png" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20260803b">
-  <script src="site.js?v=20260803b" defer></script>
-  <script src="analytics.js?v=20260803b" defer></script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Notix — AI Note Taker",
-    "alternateName": "Notix",
-    "url": "https://notix-ai.app/"
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MobileApplication",
-    "name": "Notix: AI Note Taker & Summary",
-    "url": "https://notix-ai.app/",
-    "operatingSystem": "iOS",
-    "applicationCategory": "EducationApplication",
-    "description": "Notix turns lectures, PDFs, YouTube videos, and voice recordings into clear notes, quizzes, and flashcards. Transcribe, summarize, and chat with your notes.",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "installUrl": "https://apps.apple.com/app/id6758561284",
-    "publisher": { "@type": "Organization", "name": "Notix", "email": "support@notix-ai.app", "url": "https://notix-ai.app/" }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      { "@type": "Question", "name": "How do I record a lecture and turn it into notes?", "acceptedAnswer": { "@type": "Answer", "text": "Tap the + button, choose Record or upload audio, and hit record. When the lecture ends, Notix transcribes the recording and generates a clean, structured summary automatically. You can also upload an existing audio file." } },
-      { "@type": "Question", "name": "Can I turn PDF textbooks and slides into summaries?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Upload any PDF or document and Notix produces a structured summary you can search, quiz yourself on, or turn into flashcards." } },
-      { "@type": "Question", "name": "Can I make notes from YouTube videos?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Paste a YouTube or web link and Notix turns the video or article into notes, quizzes, and flashcards." } },
-      { "@type": "Question", "name": "Is Notix free?", "acceptedAnswer": { "@type": "Answer", "text": "Notix is free to start — you can create notes, quizzes, and flashcards without paying. Notix Pro unlocks unlimited recording hours, unlimited quiz questions, and video and PDF summarization with monthly or annual plans." } },
-      { "@type": "Question", "name": "Is it okay to use Notix at my school?", "acceptedAnswer": { "@type": "Answer", "text": "Notix is a study aid: it helps you capture and review your own course materials. Recording policies differ between schools, so check your institution's rules on recording lectures before you hit record." } },
-      { "@type": "Question", "name": "What languages does Notix support?", "acceptedAnswer": { "@type": "Answer", "text": "The app is available in English, Spanish, French, German, and Russian — and your summaries and quizzes follow your chosen language." } }
-    ]
-  }
-  </script>
-</head>
-<body>
-<div class="page">
-  <div class="glow" aria-hidden="true">
-    <div class="glow-a"></div>
-    <div class="glow-b"></div>
-  </div>
+---
+import Base from '../layouts/Base.astro';
+---
 
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="logo" href="./">
-        <span class="logo-mark" aria-hidden="true"></span>
-        <span class="logo-name">Notix</span>
-      </a>
-      <nav class="site-nav">
-        <a href="#features" class="nav-hide-mobile">Features</a>
-        <a href="#faq" class="nav-hide-mobile">FAQ</a>
-        <a href="support/">Support</a>
-        <a class="pill-btn" href="https://apps.apple.com/app/id6758561284" data-track="app_store_click" data-placement="nav">Get the app</a>
-      </nav>
-    </div>
-  </header>
-
+<Base
+  title="Notix — AI Note Taker: Record Lectures, PDFs & YouTube into Notes, Quizzes & Flashcards"
+  description="Notix turns lectures, PDFs, YouTube videos, and voice recordings into clear notes, quizzes, and flashcards. Transcribe, summarize, and chat with your notes — your AI study companion for iOS."
+  nav="home"
+  glow="home"
+  og={{ title: "Notix — AI Note Taker", description: "Turn lectures, PDFs, and YouTube videos into notes, quizzes, and flashcards. Chat with your notes and get exam-ready faster." }}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Notix — AI Note Taker",
+        "alternateName": "Notix",
+        "url": "https://notix-ai.app/"
+      }
+      </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "Notix: AI Note Taker & Summary",
+        "url": "https://notix-ai.app/",
+        "operatingSystem": "iOS",
+        "applicationCategory": "EducationApplication",
+        "description": "Notix turns lectures, PDFs, YouTube videos, and voice recordings into clear notes, quizzes, and flashcards. Transcribe, summarize, and chat with your notes.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "installUrl": "https://apps.apple.com/app/id6758561284",
+        "publisher": { "@type": "Organization", "name": "Notix", "email": "support@notix-ai.app", "url": "https://notix-ai.app/" }
+      }
+      </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How do I record a lecture and turn it into notes?", "acceptedAnswer": { "@type": "Answer", "text": "Tap the + button, choose Record or upload audio, and hit record. When the lecture ends, Notix transcribes the recording and generates a clean, structured summary automatically. You can also upload an existing audio file." } },
+          { "@type": "Question", "name": "Can I turn PDF textbooks and slides into summaries?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Upload any PDF or document and Notix produces a structured summary you can search, quiz yourself on, or turn into flashcards." } },
+          { "@type": "Question", "name": "Can I make notes from YouTube videos?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Paste a YouTube or web link and Notix turns the video or article into notes, quizzes, and flashcards." } },
+          { "@type": "Question", "name": "Is Notix free?", "acceptedAnswer": { "@type": "Answer", "text": "Notix is free to start — you can create notes, quizzes, and flashcards without paying. Notix Pro unlocks unlimited recording hours, unlimited quiz questions, and video and PDF summarization with monthly or annual plans." } },
+          { "@type": "Question", "name": "Is it okay to use Notix at my school?", "acceptedAnswer": { "@type": "Answer", "text": "Notix is a study aid: it helps you capture and review your own course materials. Recording policies differ between schools, so check your institution's rules on recording lectures before you hit record." } },
+          { "@type": "Question", "name": "What languages does Notix support?", "acceptedAnswer": { "@type": "Answer", "text": "The app is available in English, Spanish, French, German, and Russian — and your summaries and quizzes follow your chosen language." } }
+        ]
+      }
+      </script>
+  <script>
+    import '../scripts/site.js';
+  </script>
+  </Fragment>
   <main class="z1">
     <!-- Hero -->
     <section class="hero">
@@ -323,16 +294,5 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-links">
-        <a href="support/">Support</a>
-        <a href="privacy/">Privacy Policy</a>
-        <a href="mailto:support@notix-ai.app">support@notix-ai.app</a>
-      </div>
-      <div class="footer-copy">© 2026 Notix</div>
-    </div>
-  </footer>
-</div>
-</body>
-</html>
+  
+</Base>
