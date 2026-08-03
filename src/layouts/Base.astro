@@ -52,6 +52,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
         <meta property="og:url" content={canonical} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Notix — AI Note Taker" />
+        {/* Absolute: the scrapers that read these do not resolve relative paths. */}
+        <meta property="og:image" content={new URL('/og.png', Astro.site).href} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Notix — turn anything you're learning into notes that teach you back" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={og.title} />
+        <meta name="twitter:description" content={og.description} />
+        <meta name="twitter:image" content={new URL('/og.png', Astro.site).href} />
       </>
     )}
     <link rel="canonical" href={canonical} />
