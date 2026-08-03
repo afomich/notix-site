@@ -1,37 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy — Notix</title>
-  <meta name="description" content="Privacy Policy for Notix — AI Note Taker: what data we collect, how we use it, and your rights.">
-  <link rel="canonical" href="https://notix-ai.app/privacy/">
-  <meta name="theme-color" content="#010206">
-  <link rel="icon" href="../favicon.ico" sizes="48x48">
-  <link rel="icon" href="../favicon-96.png" type="image/png" sizes="96x96">
-  <link rel="icon" href="../favicon-192.png" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-  <link rel="preload" href="../assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../styles.css?v=20260803b">
-  <script src="../analytics.js?v=20260803b" defer></script>
-</head>
-<body>
-<div class="page">
-  <div class="glow-page" aria-hidden="true"></div>
+---
+import Base from '../layouts/Base.astro';
+---
 
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="logo" href="../">
-        <span class="logo-mark" aria-hidden="true"></span>
-        <span class="logo-name">Notix</span>
-      </a>
-      <nav class="site-nav">
-        <a href="../support/">Support</a>
-        <a href="./" aria-current="page">Privacy</a>
-      </nav>
-    </div>
-  </header>
-
+<Base
+  title="Privacy Policy — Notix"
+  description="How Notix collects, uses, and protects your data."
+  current="privacy"
+>
   <main class="page-main">
     <h1>Privacy Policy</h1>
     <p class="updated">Effective date: August 3, 2026</p>
@@ -94,16 +69,5 @@
     <p>Questions about this policy or your data: <a href="mailto:support@notix-ai.app">support@notix-ai.app</a>.</p>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-links">
-        <a href="../support/">Support</a>
-        <a href="./">Privacy Policy</a>
-        <a href="mailto:support@notix-ai.app">support@notix-ai.app</a>
-      </div>
-      <div class="footer-copy">© 2026 Notix</div>
-    </div>
-  </footer>
-</div>
-</body>
-</html>
+  
+</Base>

@@ -1,0 +1,134 @@
+---
+// The shell every page shares: head, header, footer.
+//
+// Before this existed each page carried its own copy, so a change to the nav or
+// the meta tags meant editing every file and hoping none was missed. The head is
+// driven by props; anything page-specific that does not fit a prop goes through
+// the `head` slot.
+import '../styles/styles.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** 'home' carries the section anchors and the App Store button; 'sub' is the short nav. */
+  nav?: 'home' | 'sub';
+  /** Marks the current page in the sub nav. */
+  current?: 'support' | 'privacy';
+  /** Extra classes on .page — 404 uses page-flex to pin the footer down. */
+  pageClass?: string;
+  /** Full-bleed hero glow on the home page, single soft glow elsewhere. */
+  glow?: 'home' | 'page';
+  noindex?: boolean;
+  /** Open Graph is only worth carrying on pages meant to be shared. */
+  og?: { title: string; description: string };
+}
+
+const {
+  title,
+  description,
+  nav = 'sub',
+  current,
+  pageClass = '',
+  glow = 'page',
+  noindex = false,
+  og,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {og && (
+      <>
+        <meta property="og:title" content={og.title} />
+        <meta property="og:description" content={og.description} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Notix — AI Note Taker" />
+      </>
+    )}
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#010206" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+    <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link
+      rel="preload"
+      href="/assets/fonts/inter-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <slot name="head" />
+    <script>
+      import '../scripts/analytics.js';
+    </script>
+  </head>
+
+  <body>
+    <div class:list={['page', pageClass]}>
+      {glow === 'home' ? (
+        <div class="glow" aria-hidden="true">
+          <div class="glow-a"></div>
+          <div class="glow-b"></div>
+        </div>
+      ) : (
+        <div class="glow-page" aria-hidden="true"></div>
+      )}
+
+      <header class="site-header">
+        <div class="header-inner">
+          <a class="logo" href="/">
+            <span class="logo-mark" aria-hidden="true"></span>
+            <span class="logo-name">Notix</span>
+          </a>
+          <nav class="site-nav">
+            {nav === 'home' ? (
+              <>
+                <a href="#features" class="nav-hide-mobile">Features</a>
+                <a href="#faq" class="nav-hide-mobile">FAQ</a>
+                <a href="/support/">Support</a>
+                <a
+                  class="pill-btn"
+                  href="https://apps.apple.com/app/id6758561284"
+                  data-track="app_store_click"
+                  data-placement="nav">Get the app</a
+                >
+              </>
+            ) : (
+              <>
+                <a href="/support/" aria-current={current === 'support' ? 'page' : undefined}
+                  >Support</a
+                >
+                <a href="/privacy/" aria-current={current === 'privacy' ? 'page' : undefined}
+                  >Privacy</a
+                >
+              </>
+            )}
+          </nav>
+        </div>
+      </header>
+
+      <slot />
+
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <div class="footer-links">
+            <a href="/support/">Support</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="mailto:support@notix-ai.app">support@notix-ai.app</a>
+          </div>
+          <div class="footer-copy">© 2026 Notix</div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

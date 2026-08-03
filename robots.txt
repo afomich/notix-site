@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://notix-ai.app/sitemap.xml

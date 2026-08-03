@@ -1,0 +1,27 @@
+# Cloudflare Pages reads this file. GitHub Pages had no way to set headers at all,
+# which is why the site shipped without any and why a stale stylesheet could sit in
+# a visitor's cache for ten minutes after a fix went out.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Astro fingerprints everything under /_astro, so the filename changes whenever the
+# contents do. Cache it forever; a deploy can never serve a stale one.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts and icons are stable but not fingerprinted, so cache them for a day rather
+# than forever — a replaced file still has to be able to reach people.
+/assets/*
+  Cache-Control: public, max-age=86400
+
+# HTML must never be held: it is what points at the fingerprinted assets, so a stale
+# copy pins a visitor to the previous deploy.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
