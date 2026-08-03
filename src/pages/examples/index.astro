@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+// Newest first: an example's value decays as the model behind it changes, so the
+// most recently processed one is the most representative of what the app does now.
+const examples = (await getCollection('examples')).sort(
+  (a, b) => b.data.processedOn.valueOf() - a.data.processedOn.valueOf()
+);
+
+const subjects = [...new Set(examples.map((e) => e.data.subject))].sort();
+---
+
+<Base
+  title="Examples — what Notix produces, unedited"
+  description="Real Notix output from openly licensed lectures, papers and articles: transcripts, summaries, flashcards and quizzes, published as produced."
+  og={{
+    title: 'Notix examples — real output, unedited',
+    description:
+      'Openly licensed lectures and papers run through Notix. Summaries, flashcards and quizzes exactly as produced.',
+  }}
+>
+  <main class="page-main ex">
+    <h1>Examples</h1>
+    <p class="ex-lede">
+      Openly licensed material run through Notix and published as it came out — no
+      editing, no picking the good runs. Each page shows what went in, under what
+      licence, and when it was processed.
+    </p>
+
+    {examples.length === 0 ? (
+      <p class="ex-note">The first examples are being prepared.</p>
+    ) : (
+      <>
+        {subjects.length > 1 && (
+          <p class="ex-subjects">{subjects.join(' · ')}</p>
+        )}
+        <ul class="ex-list">
+          {examples.map((e) => (
+            <li>
+              <a href={`/examples/${e.id}/`}>
+                <span class="ex-list-subject">{e.data.subject}</span>
+                <span class="ex-list-title">{e.data.title}</span>
+                <span class="ex-list-meta">
+                  {e.data.source.publisher} · {e.data.source.extent} · {e.data.source.licence}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+  </main>
+</Base>

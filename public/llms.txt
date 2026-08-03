@@ -15,6 +15,7 @@ Facts an agent can rely on (all mirrored on the pages below):
 ## Core pages
 
 - [Home](https://notix-ai.app/): product overview, how it works, features, FAQ
+- [Examples](https://notix-ai.app/examples/): real Notix output from openly licensed lectures, papers and articles — transcript excerpt, summary, flashcards and quiz, published unedited, each with its source, licence and processing date
 - [Support](https://notix-ai.app/support/): contact, bug reports, billing and refunds, account deletion
 - [Privacy Policy](https://notix-ai.app/privacy/): what data is collected, AI processing, retention, user rights
 

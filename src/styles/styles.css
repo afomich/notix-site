@@ -510,3 +510,88 @@ h1 em, .em-accent { font-style: normal; color: var(--accent); }
   .glow-a, .glow-b, .badge-dot, .notfound-cat { animation: none; }
   .pain, .step, .feature, .testimonial, .btn-primary { transition: none; }
 }
+
+/* ---------- Examples ---------- */
+
+.ex .ex-crumb { font-size: 14px; color: var(--text-muted); margin-bottom: 14px; }
+.ex .ex-crumb a { color: var(--accent); }
+.ex .ex-lede { font-size: 18px; line-height: 1.6; color: var(--text-body); margin-bottom: 40px; }
+.ex .ex-note { font-size: 14px; color: var(--text-faint); }
+.ex .ex-count {
+  font-size: 14px; font-weight: 500; color: var(--text-muted);
+  border: 1px solid var(--glass-border); border-radius: 999px; padding: 2px 10px; margin-left: 8px;
+  vertical-align: middle;
+}
+
+.ex-source {
+  background: var(--glass-dim); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 22px 24px; margin-bottom: 44px;
+}
+.ex-source h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin: 0 0 16px; }
+.ex-source dl { margin: 0; display: grid; gap: 10px; }
+.ex-source dl > div { display: grid; grid-template-columns: 168px 1fr; gap: 12px; }
+.ex-source dt { font-size: 14.5px; color: var(--text-faint); }
+.ex-source dd { margin: 0; font-size: 14.5px; color: var(--text-quote); }
+.ex-source a { color: var(--accent); }
+
+.ex-block { margin-bottom: 44px; }
+.ex-transcript {
+  margin: 0 0 10px; padding: 18px 22px;
+  border-left: 2px solid var(--hover-border); background: var(--glass-dim);
+  border-radius: 0 12px 12px 0;
+  font-size: 15px; line-height: 1.7; color: var(--text-quote);
+}
+.ex-summary { font-size: 16px; line-height: 1.75; color: var(--text-body); }
+.ex-summary h2 { font-size: 20px; margin: 28px 0 12px; color: var(--text); }
+.ex-summary h3 { font-size: 17px; margin: 22px 0 10px; color: var(--text); }
+.ex-summary ul, .ex-summary ol { padding-left: 22px; margin: 12px 0; }
+.ex-summary li { margin-bottom: 8px; }
+
+.ex-cards { display: grid; gap: 10px; }
+.ex-card {
+  background: var(--glass-dim); border: 1px solid var(--glass-border); border-radius: 14px;
+}
+.ex-card summary {
+  cursor: pointer; padding: 16px 20px; font-weight: 600; font-size: 15.5px;
+  list-style: none;
+}
+.ex-card summary::-webkit-details-marker { display: none; }
+.ex-card summary::after { content: '+'; float: right; color: var(--accent); }
+.ex-card[open] summary::after { content: '−'; }
+.ex-card > div { padding: 0 20px 18px; }
+.ex-card p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--text-body); }
+
+.ex-quiz { padding-left: 0; list-style: none; counter-reset: q; display: grid; gap: 22px; }
+.ex-quiz > li {
+  counter-increment: q;
+  background: var(--glass-dim); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 20px 22px;
+}
+.ex-q { font-weight: 600; font-size: 15.5px; margin: 0 0 12px; }
+.ex-q::before { content: counter(q) '. '; color: var(--text-muted); }
+.ex-quiz ul { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 6px; }
+.ex-quiz ul li { font-size: 15px; color: var(--text-body); padding-left: 22px; position: relative; }
+.ex-quiz ul li::before { content: '○'; position: absolute; left: 0; color: var(--text-faint); }
+.ex-quiz ul li.ex-right { color: var(--text); font-weight: 600; }
+.ex-quiz ul li.ex-right::before { content: '●'; color: var(--accent); }
+.ex-why { font-size: 14.5px; color: var(--text-faint); margin: 0; line-height: 1.6; }
+
+.ex-cta { text-align: center; padding: 40px 0 8px; border-top: 1px solid var(--divider); }
+.ex-cta h2 { font-size: 24px; margin-bottom: 8px; }
+.ex-cta p { color: var(--text-body); margin-bottom: 22px; }
+
+.ex-subjects { font-size: 14px; color: var(--text-muted); margin-bottom: 26px; }
+.ex-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.ex-list a {
+  display: grid; gap: 6px; padding: 20px 22px;
+  background: var(--glass-dim); border: 1px solid var(--glass-border); border-radius: 16px;
+  transition: border-color 0.25s ease;
+}
+.ex-list a:hover { border-color: var(--hover-border); }
+.ex-list-subject { font-size: 12.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); }
+.ex-list-title { font-size: 18px; font-weight: 700; color: var(--text); }
+.ex-list-meta { font-size: 13.5px; color: var(--text-faint); }
+
+@media (max-width: 560px) {
+  .ex-source dl > div { grid-template-columns: 1fr; gap: 2px; }
+}
