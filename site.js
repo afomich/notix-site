@@ -29,25 +29,55 @@
 
   // FAQ: animate <details> close (open state animates via CSS [open] rule;
   // closing needs JS because removing [open] hides content instantly).
+  //
+  // The close is finished by whichever comes first: the transition ending, or a
+  // timer. The timer is not belt-and-braces — transitionend genuinely may never
+  // arrive. Click a summary a second time while it is already collapsing and the
+  // inline value is set to 0fr when it is already 0fr, so no transition starts
+  // and no event fires. Without a fallback the item stays `open` with collapsed
+  // content: the page keeps the extra height, the footer sits that much too low,
+  // and the item can never be reopened because every later click takes the
+  // "already open" branch.
+  var CLOSE_MS = 450; // .faq-a transition is 0.4s in styles.css, plus a margin
+
   document.querySelectorAll(".faq-item").forEach(function (item) {
     var summary = item.querySelector("summary");
     var answer = item.querySelector(".faq-a");
     if (!summary || !answer) return;
+
+    var closing = false;
+
     summary.addEventListener("click", function (e) {
       if (!item.open) return; // opening: let the default toggle run, CSS animates 0fr→1fr
       e.preventDefault();
-      answer.style.gridTemplateRows = "0fr";
+      if (closing) return; // already collapsing; ignore the impatient second click
+      closing = true;
+
       var caret = item.querySelector(".faq-c");
+      answer.style.gridTemplateRows = "0fr";
       if (caret) caret.style.transform = "rotate(0deg)";
-      answer.addEventListener(
-        "transitionend",
-        function () {
-          item.open = false;
-          answer.style.gridTemplateRows = "";
-          if (caret) caret.style.transform = "";
-        },
-        { once: true }
-      );
+
+      var finished = false;
+      var timer = null;
+
+      function finish() {
+        if (finished) return;
+        finished = true;
+        clearTimeout(timer);
+        answer.removeEventListener("transitionend", onTransitionEnd);
+        item.open = false;
+        answer.style.gridTemplateRows = "";
+        if (caret) caret.style.transform = "";
+        closing = false;
+      }
+
+      function onTransitionEnd(ev) {
+        // Ignore transitions bubbling up from the answer's own contents.
+        if (ev.target === answer && ev.propertyName === "grid-template-rows") finish();
+      }
+
+      answer.addEventListener("transitionend", onTransitionEnd);
+      timer = setTimeout(finish, CLOSE_MS);
     });
   });
 })();
