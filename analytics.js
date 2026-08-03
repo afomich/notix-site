@@ -80,9 +80,39 @@
     });
   });
 
+  // The banner's styles ship with the banner rather than living in styles.css.
+  //
+  // They were in the stylesheet first, and that broke: the HTML and the CSS are
+  // cached independently, so a visitor with a stale styles.css got the markup
+  // without the rules. The bar then rendered as a plain block at the end of the
+  // body — a strip of dead space under the footer. An element injected by script
+  // cannot rely on a separately cached file having caught up, so its own styles
+  // come with it.
+  var BANNER_CSS =
+    ".consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:100;" +
+    "display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;" +
+    "max-width:880px;margin:0 auto;padding:16px 20px;" +
+    "background:rgba(10,14,28,0.92);border:1px solid rgba(178,178,178,0.18);border-radius:16px;" +
+    "backdrop-filter:blur(12px);box-shadow:0 16px 48px rgba(0,0,0,0.5)}" +
+    ".consent-text{margin:0;flex:1 1 320px;font-size:14px;line-height:1.55;color:#9ba3bc}" +
+    ".consent-text a{color:#a5bdff;text-decoration:underline}" +
+    ".consent-actions{display:flex;gap:10px;flex:0 0 auto}" +
+    ".consent-btn{font:inherit;font-size:14px;font-weight:600;padding:10px 22px;" +
+    "border-radius:999px;cursor:pointer;transition:background .25s ease,border-color .25s ease}" +
+    ".consent-no{background:transparent;color:#b9c2d8;border:1px solid rgba(178,178,178,0.18)}" +
+    ".consent-no:hover{border-color:rgba(165,189,255,0.4);color:#fff}" +
+    ".consent-yes{background:rgba(13,95,255,0.45);color:#fff;border:1px solid rgba(120,160,255,0.5)}" +
+    ".consent-yes:hover{background:rgba(13,95,255,0.7)}" +
+    "@media (max-width:560px){.consent{flex-direction:column;align-items:stretch}" +
+    ".consent-actions{justify-content:flex-end}}";
+
   // The banner is built here rather than written into every page, so the four
   // HTML files stay free of consent markup and a vendor swap touches one file.
   function showBanner() {
+    var style = document.createElement("style");
+    style.textContent = BANNER_CSS;
+    document.head.appendChild(style);
+
     var bar = document.createElement("div");
     bar.className = "consent";
     bar.setAttribute("role", "dialog");
