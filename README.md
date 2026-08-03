@@ -31,5 +31,9 @@ to bump.
 
 ## Deploy
 
-Cloudflare Pages builds from this repository: `npm run build`, output directory
-`dist`. `public/_headers` sets caching and security headers.
+Cloudflare Workers builds from this repository on push. `wrangler.jsonc` points at
+`dist/` as a static asset directory — there is no Worker script, Workers just serves
+the files Astro produced. `public/_headers` sets caching and security headers and is
+parsed by Workers rather than served.
+
+Build command `npm run build`, deploy command `npx wrangler deploy`.

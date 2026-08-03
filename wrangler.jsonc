@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "notix-site",
+  "compatibility_date": "2026-08-03",
+
+  // No "main": there is no Worker script. The site is static HTML built by Astro,
+  // and Workers serves it directly from dist/.
+  //
+  // not_found_handling "404-page" makes an unmatched path return 404 with our own
+  // dist/404.html. The alternative, "single-page-application", would answer every
+  // unknown URL with index.html and a 200 — which for a content site means dead
+  // links quietly become soft-404s and get indexed as duplicates of the homepage.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
