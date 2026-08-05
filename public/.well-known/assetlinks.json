@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls", "delegate_permission/common.get_login_creds"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mesartim.notix",
+      "sha256_cert_fingerprints": [
+        "A6:B6:C2:54:C4:D2:2D:CE:A8:01:03:74:9A:36:7E:41:44:D2:8A:FD:80:F6:4A:14:72:87:1A:8F:2A:20:44:D9"
+      ]
+    }
+  }
+]

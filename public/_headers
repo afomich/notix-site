@@ -19,3 +19,8 @@
 # Stable but not fingerprinted, so a day rather than forever.
 /assets/*
   Cache-Control: public, max-age=86400
+
+# Apple parses the AASA only when it is served as JSON; the file has no extension
+# so the default content-type would be octet-stream.
+/.well-known/apple-app-site-association
+  Content-Type: application/json

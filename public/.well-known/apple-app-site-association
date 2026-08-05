@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["87N3SAT5VU.com.mesartim.notix"],
+        "components": [
+          { "/": "/reset-password", "comment": "Password reset deep link" }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["87N3SAT5VU.com.mesartim.notix"]
+  }
+}
