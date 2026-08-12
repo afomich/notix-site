@@ -6,7 +6,6 @@ import Base from '../layouts/Base.astro';
   title="Notix — AI Note Taker: Record Lectures, PDFs & YouTube into Notes, Quizzes & Flashcards"
   description="Notix turns lectures, PDFs, YouTube videos, and voice recordings into clear notes, quizzes, and flashcards. Transcribe, summarize, and chat with your notes — your AI study companion for iOS."
   nav="home"
-  glow="home"
   og={{ title: "Notix — AI Note Taker", description: "Turn lectures, PDFs, and YouTube videos into notes, quizzes, and flashcards. Chat with your notes and get exam-ready faster." }}
 >
   <Fragment slot="head">
@@ -43,12 +42,11 @@ import Base from '../layouts/Base.astro';
           { "@type": "Question", "name": "Can I make notes from YouTube videos?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Paste a YouTube or web link and Notix turns the video or article into notes, quizzes, and flashcards." } },
           { "@type": "Question", "name": "Is Notix free?", "acceptedAnswer": { "@type": "Answer", "text": "Notix is free to start — you can create notes, quizzes, and flashcards without paying. Notix Pro unlocks unlimited recording hours, unlimited quiz questions, and video and PDF summarization with monthly or annual plans." } },
           { "@type": "Question", "name": "Is it okay to use Notix at my school?", "acceptedAnswer": { "@type": "Answer", "text": "Notix is a study aid: it helps you capture and review your own course materials. Recording policies differ between schools, so check your institution's rules on recording lectures before you hit record." } },
-          { "@type": "Question", "name": "What languages does Notix support?", "acceptedAnswer": { "@type": "Answer", "text": "The app is available in English, Spanish, French, German, and Russian — and your summaries and quizzes follow your chosen language." } }
+          { "@type": "Question", "name": "What languages does Notix support?", "acceptedAnswer": { "@type": "Answer", "text": "The app is available in English, Spanish, French, German, Russian, and Polish — and your summaries and quizzes follow your chosen language." } }
         ]
       }
       </script>
   <script>
-    import '../scripts/site.js';
   </script>
   </Fragment>
   <main class="z1">
@@ -86,27 +84,27 @@ import Base from '../layouts/Base.astro';
                 </div>
                 <div class="chip selected">
                   <span class="im" style="--icon:url('/assets/icons/folder.svg');width:17px;height:17px;background:#A5BDFF"></span>
-                  <span class="chip-text"><span class="chip-name">Folder poetry</span><span class="chip-meta">7 notes</span></span>
+                  <span class="chip-text"><span class="chip-name">Chem 201</span><span class="chip-meta">7 notes</span></span>
                 </div>
               </div>
               <div class="phone-list">
                 <span class="phone-section">Today</span>
                 <div class="note-card">
                   <span class="im" style="--icon:url('/assets/icons/play.svg');width:19px;height:19px;background:#A5BDFF"></span>
-                  <span class="note-text"><span class="note-title">New recording or uploaded audio</span><span class="note-meta">26 seconds</span></span>
+                  <span class="note-text"><span class="note-title">Organic Chemistry — Alkenes</span><span class="note-meta">47 min</span></span>
                 </div>
                 <div class="note-card">
                   <span class="im" style="--icon:url('/assets/icons/document.svg');width:19px;height:19px;background:#A5BDFF"></span>
-                  <span class="note-text"><span class="note-title">Text note, uploaded document, link, video</span><span class="note-meta">10:34</span></span>
+                  <span class="note-text"><span class="note-title">Macroeconomics ch. 4 — Inflation</span><span class="note-meta">10:34</span></span>
                 </div>
                 <span class="phone-section">Previous 30 days</span>
                 <div class="note-card">
                   <span class="im" style="--icon:url('/assets/icons/play.svg');width:19px;height:19px;background:#A5BDFF"></span>
-                  <span class="note-text"><span class="note-title">New recording or uploaded audio</span><span class="note-meta">27 Jan 2026, 26 seconds</span></span>
+                  <span class="note-text"><span class="note-title">Seminar — Constitutional law</span><span class="note-meta">27 Jan 2026, 52 min</span></span>
                 </div>
                 <div class="note-card">
                   <span class="im" style="--icon:url('/assets/icons/document.svg');width:19px;height:19px;background:#A5BDFF"></span>
-                  <span class="note-text"><span class="note-title">Text note, uploaded document, link, video</span><span class="note-meta">27 Jan 2026</span></span>
+                  <span class="note-text"><span class="note-title">The Krebs cycle, explained</span><span class="note-meta">27 Jan 2026</span></span>
                 </div>
               </div>
               <div class="phone-nav">
@@ -128,7 +126,7 @@ import Base from '../layouts/Base.astro';
         <div class="value-card"><strong>Anything in</strong><span>audio, PDF, YouTube, web</span></div>
         <div class="value-card"><strong>Notes in seconds</strong><span>transcript + clean summary</span></div>
         <div class="value-card"><strong>Active recall out</strong><span>quizzes, flashcards, AI chat</span></div>
-        <div class="value-card"><strong>5 languages</strong><span>EN · ES · FR · DE · RU</span></div>
+        <div class="value-card"><strong>6 languages</strong><span>EN · ES · FR · DE · RU · PL</span></div>
       </div>
     </section>
 
@@ -192,7 +190,7 @@ import Base from '../layouts/Base.astro';
             <p>Paste a link and Notix turns the video or page into searchable notes.</p>
           </div>
           <div class="feature">
-            <span class="im" style="--icon:url('/assets/icons/check.svg')" aria-hidden="true"></span>
+            <span class="im" style="--icon:url('/assets/icons/magnifer.svg')" aria-hidden="true"></span>
             <h3>Find your gaps before the exam does</h3>
             <p>Turn any note into practice questions — active recall beats re-reading every time.</p>
           </div>
@@ -214,7 +212,7 @@ import Base from '../layouts/Base.astro';
           <div class="feature">
             <span class="im" style="--icon:url('/assets/icons/globus.svg')" aria-hidden="true"></span>
             <h3>Speaks your language</h3>
-            <p>English, Spanish, French, German, and Russian — summaries and quizzes follow your language.</p>
+            <p>English, Spanish, French, German, Russian, and Polish — summaries and quizzes follow your language.</p>
           </div>
           <div class="feature">
             <span class="im" style="--icon:url('/assets/icons/export.svg')" aria-hidden="true"></span>
@@ -276,7 +274,7 @@ import Base from '../layouts/Base.astro';
           </details>
           <details class="faq-item">
             <summary><span class="faq-q">What languages does Notix support?</span><span class="faq-c" aria-hidden="true">+</span></summary>
-            <div class="faq-a"><div><p>The app is available in English, Spanish, French, German, and Russian — and your summaries and quizzes follow your chosen language.</p></div></div>
+            <div class="faq-a"><div><p>The app is available in English, Spanish, French, German, Russian, and Polish — and your summaries and quizzes follow your chosen language.</p></div></div>
           </details>
         </div>
       </div>
