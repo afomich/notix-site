@@ -13,15 +13,24 @@ const examples = defineCollection({
     title: z.string(),
     /** Shown in listings and search results; keep it to one sentence. */
     description: z.string(),
+    /** The <title> tag, when the generated title is not what a searcher types.
+     *  The h1 always shows `title` — what the model actually produced — so this
+     *  changes what search engines index, never what the page claims was made. */
+    seoTitle: z.string().optional(),
+    /** Short words, not school subjects. The eight subjects this replaced could not
+     *  hold the material we actually publish: a federal guide on spaced review is
+     *  not Biology, and a food-safety chart is none of the eight. Kept to one word
+     *  each because the list card shows the category as a plain eyebrow, no icon.
+     *  Study methods live under 'Practical', not a 'Learning' of their own — that
+     *  is how the design mockup labels Cornell, Pomodoro, Feynman and Leitner. */
     subject: z.enum([
-      'Biology',
+      'Statistics',
+      'Science',
       'History',
-      'Computer Science',
-      'Economics',
-      'Psychology',
-      'Physics',
-      'Literature',
-      'Medicine',
+      'Health',
+      'Technology',
+      'Culture',
+      'Practical',
     ]),
     /** Which Notix input path produced this — the page groups examples by it. */
     inputType: z.enum(['lecture', 'pdf', 'video', 'audio', 'article']),
