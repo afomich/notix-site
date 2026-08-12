@@ -26,11 +26,16 @@
   --glass-border-dim: rgba(178, 178, 178, 0.15);
   --divider: rgba(178, 178, 178, 0.14);
   --hover-border: rgba(165, 189, 255, 0.4);
+  /* Measured from the real header by site.js. The panel used to hang off a
+     hard-coded 77px, but the mobile header is 71px tall (44px burger + 13px
+     padding either side + border) — the 6px difference showed as a gap with the
+     page glow visible through it. */
+  --header-h: 77px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 
 /* Sticky-шапка высотой 77px накрывает заголовок секции, к которой ведёт якорь. */
 :target, section[id] { scroll-margin-top: 92px; }
@@ -53,7 +58,10 @@ a:hover { color: #ffffff; }
 
 /* ---------- Background glow ---------- */
 
-.glow { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.glow {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  overflow: hidden; overflow: clip;
+}
 
 .glow-a,
 .glow-b,
@@ -119,18 +127,30 @@ a:hover { color: #ffffff; }
    .glow-cta с bottom: -260px): контент уезжал вверх, под футером оставалась
    пустота, а sticky-шапка переставала работать. hidden оставлен запасным
    вариантом для браузеров без поддержки clip. */
-.page { position: relative; background: var(--bg); min-height: 100vh; overflow: hidden; overflow: clip; }
+/* No overflow here. `position: sticky` is ignored when any ancestor has an
+   overflow other than visible, and .page is the header's direct parent — the clip
+   that used to live here silently unstuck the header on every page. The glow is
+   what needed clipping, so it clips itself. */
+.page { position: relative; background: var(--bg); min-height: 100vh; }
 .page-flex { display: flex; flex-direction: column; }
 .z1 { position: relative; z-index: 1; }
 
 /* ---------- Header ---------- */
 
 .site-header {
-  position: sticky; top: 0; z-index: 50;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  position: sticky; top: 0; z-index: 61;
   background: rgba(1, 2, 6, 0.72);
   border-bottom: 1px solid var(--divider);
+}
+/* The blur lives on a pseudo-element, not on the header itself. `backdrop-filter`
+   makes an element a containing block for `position: fixed` descendants — with it
+   on the header, the mobile menu panel sized itself against the 77px header
+   instead of the viewport and collapsed to a scrolling sliver. A pseudo-element
+   is a child, not an ancestor, so it blurs without capturing anything. */
+.site-header::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .header-inner {
@@ -154,7 +174,7 @@ a:hover { color: #ffffff; }
 .site-nav a:hover, .site-nav a[aria-current="page"] { color: #fff; }
 
 .pill-btn {
-  font-size: 14px; font-weight: 600; color: #fff;
+  font-size: 14px; font-weight: 600; color: #fff; white-space: nowrap;
   background: rgba(13, 95, 255, 0.4);
   border: 1px solid rgba(13, 95, 255, 0.55);
   padding: 9px 20px; border-radius: 999px;
@@ -200,7 +220,11 @@ a:hover { color: #ffffff; }
 }
 
 .hero-text {
-  flex: 1 1 480px; min-width: 340px;
+  /* min(…, 100%) rather than a flat 340px: on a 390px phone the wrap is 334px
+     wide, so a hard 340px floor made this block 6px wider than its parent and
+     the centring pushed it 3px past both edges — which is exactly the "slightly
+     off" look. The floor still holds wherever there is room for it. */
+  flex: 1 1 480px; min-width: min(340px, 100%);
   display: flex; flex-direction: column; align-items: flex-start; gap: 22px;
 }
 
@@ -313,7 +337,11 @@ h1 em, .em-accent { font-style: normal; color: var(--accent); }
 
 .section { padding: 72px 28px; }
 .section-tight { padding: 0 28px 64px; padding-top: 32px; }
-.section-cta { padding: 88px 28px 96px; position: relative; }
+/* Clips its own glow. The circle is 760px wide against a 390px phone, and unlike
+   the page-level glows it does not live inside .glow — so with the clip removed
+   from .page (it was breaking the sticky header) this was the one element still
+   able to scroll the page sideways. */
+.section-cta { padding: 88px 28px 96px; position: relative; overflow: clip; }
 
 .section h2 {
   font-size: clamp(26px, 3.2vw, 38px); font-weight: 800; letter-spacing: -1px;
@@ -329,7 +357,7 @@ h1 em, .em-accent { font-style: normal; color: var(--accent); }
 }
 
 /* value strip */
-.value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap: 14px; }
 .value-card {
   padding: 20px 22px; border-radius: 18px;
   background: var(--glass); border: 1px solid var(--glass-border);
@@ -338,7 +366,7 @@ h1 em, .em-accent { font-style: normal; color: var(--accent); }
 .value-card span { font-size: 13.5px; color: var(--text-body); }
 
 /* pains */
-.pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 14px; }
 .pain {
   padding: 24px; border-radius: 18px;
   background: var(--glass-dim); border: 1px solid var(--glass-border-dim);
@@ -350,7 +378,7 @@ h1 em, .em-accent { font-style: normal; color: var(--accent); }
 .pivot { margin-top: 32px; font-size: 18px; font-weight: 600; color: var(--accent); text-align: center; }
 
 /* how it works */
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 16px; }
 .step {
   padding: 30px 26px; border-radius: 20px;
   background: var(--glass); border: 1px solid var(--glass-border);
@@ -368,7 +396,7 @@ h1 em, .em-accent { font-style: normal; color: var(--accent); }
 .step p { font-size: 15px; line-height: 1.6; color: var(--text-body); }
 
 /* features */
-.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 14px; }
 .feature {
   padding: 26px; border-radius: 20px;
   background: var(--glass-dim); border: 1px solid var(--glass-border-dim);
@@ -385,7 +413,7 @@ h1 em, .em-accent { font-style: normal; color: var(--accent); }
 .feature p { font-size: 14.5px; line-height: 1.6; color: var(--text-body); }
 
 /* testimonials */
-.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
+.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr)); gap: 16px; }
 .testimonial {
   padding: 28px; border-radius: 20px;
   background: var(--glass); border: 1px solid var(--glass-border);
@@ -456,14 +484,21 @@ h1 em, .em-accent { font-style: normal; color: var(--accent); }
 
 .page-main { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 64px 28px 88px; }
 
-.page-main h1 { font-size: clamp(30px, 4vw, 42px); font-weight: 800; letter-spacing: -1.2px; margin-bottom: 10px; }
+.page-main:not(.ex) h1 { font-size: clamp(30px, 4vw, 42px); font-weight: 800; letter-spacing: -1.2px; margin-bottom: 10px; }
 .page-main .updated { font-size: 14.5px; color: var(--text-muted); margin-bottom: 32px; }
-.page-main h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin: 36px 0 14px; }
-.page-main p, .page-main li { font-size: 15.5px; line-height: 1.7; color: var(--text-body); margin-bottom: 12px; }
-.page-main ul { padding-left: 22px; margin-bottom: 16px; }
-.page-main li { line-height: 1.9; margin-bottom: 0; }
-.page-main strong { color: #fff; }
-.page-main a { font-weight: 600; }
+.page-main:not(.ex) h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin: 36px 0 14px; }
+/* Scoped away from .ex on purpose. These are the defaults for the prose pages
+   (support, privacy), and `.page-main ul` is more specific than `.ex-grid` — it
+   was silently adding a 22px left padding to the card grid, which pushed every
+   card off-centre by exactly that much. Element selectors reaching into a
+   component is how that happens. */
+.page-main:not(.ex) p, .page-main:not(.ex) li {
+  font-size: 15.5px; line-height: 1.7; color: var(--text-body); margin-bottom: 12px;
+}
+.page-main:not(.ex) ul { padding-left: 22px; margin-bottom: 16px; }
+.page-main:not(.ex) li { line-height: 1.9; margin-bottom: 0; }
+.page-main:not(.ex) strong { color: #fff; }
+.page-main:not(.ex) a { font-weight: 600; }
 
 .contact-card {
   padding: 26px 28px; border-radius: 20px;
@@ -491,15 +526,126 @@ h1 em, .em-accent { font-style: normal; color: var(--accent); }
 }
 .notfound-inner p { font-size: 17px; line-height: 1.65; color: var(--text-body); }
 
+/* ---------- Burger ---------- */
+
+.nav-burger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 44px; height: 44px; padding: 0; margin-right: -10px;
+  background: none; border: 0; cursor: pointer;
+}
+.nav-burger span {
+  display: block; width: 22px; height: 2px; border-radius: 2px;
+  background: #fff; margin: 0 auto;
+  transition: transform 0.25s ease, opacity 0.2s ease, width 0.2s ease;
+}
+.nav-burger:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* The three bars become a cross while the panel is open — the control that opened
+   it is the control that closes it, so it has to say so.
+   The middle bar is collapsed three ways at once: opacity, zero width and zero
+   scale. Fading alone left it faintly visible on some renders, and a third line
+   across a cross reads as an asterisk, not a close button. */
+.nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0; width: 0; transform: scaleX(0);
+}
+.nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 /* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .nav-burger { display: flex; }
+  .site-nav { display: none; }
+}
+
+/* ---------- Mobile nav panel ---------- */
+
+/* Full height, with the footer pinned to the bottom — the links sit at the top,
+   the button under them, and the legal strip stays where a footer belongs rather
+   than floating under the button. */
+.nav-panel {
+  position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; z-index: 60;
+  background: var(--bg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+.nav-panel[data-open] { transform: translateX(0); }
+.nav-panel-glow {
+  position: absolute; top: -50px; right: -60px; width: 220px; height: 220px;
+  border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(13, 95, 255, 0.35), transparent);
+  filter: blur(50px);
+}
+.nav-panel-inner {
+  position: relative; width: 100%; height: 100%; box-sizing: border-box;
+  padding: 8px 28px 28px;
+  display: flex; flex-direction: column;
+  overflow-y: auto; overscroll-behavior: contain;
+}
+.nav-panel-inner > a:not(.nav-panel-cta) {
+  display: block; font-size: 19px; font-weight: 500; color: #fff;
+  padding: 18px 0; border-bottom: 1px solid var(--divider);
+}
+/* Centred, but with real presence — sized to its label alone it read as a small
+   chip against four full-width links. Still not edge to edge. */
+.nav-panel-cta {
+  margin: 28px auto 0; display: inline-block; align-self: center;
+  text-align: center; font-size: 16px; padding: 16px 40px; border-bottom: 0;
+  min-width: 240px; max-width: 100%; box-sizing: border-box;
+}
+/* margin-top:auto pushes it to the bottom of the flex column, which is what
+   turns the empty space below the button into deliberate breathing room. */
+.nav-panel-foot {
+  margin-top: auto; padding-top: 18px; border-top: 1px solid var(--divider);
+  display: flex; flex-wrap: wrap; gap: 12px 20px;
+  align-items: center; justify-content: space-between;
+}
+.nav-panel-foot > div { display: flex; gap: 16px; flex-wrap: wrap; }
+.nav-panel-foot a { font-size: 13px; color: var(--text-muted); }
+.nav-panel-foot span { font-size: 12px; color: var(--text-faint); }
+
+.nav-scrim {
+  position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; z-index: 59;
+  background: rgba(1, 2, 6, 0.6);
+  overscroll-behavior: contain; touch-action: none;
+}
+.nav-scrim[hidden] { display: none; }
+
+/* Above the breakpoint the panel must never appear, whatever state it was left
+   in — the desktop nav is back and two menus at once is a bug, not a fallback. */
+@media (min-width: 641px) {
+  .nav-panel, .nav-scrim { display: none; }
+}
+
+/* Locking the page while the menu is open.
+   `overflow: hidden` on body does not hold on iOS Safari, and
+   `overscroll-behavior` only stops chaining, not the page scrolling underneath a
+   fixed layer. Pinning the body works everywhere — but it takes the body out of
+   the scroll flow, and a sticky header with nothing to stick to snaps back to
+   the top of the document. So while the lock is on, the header is fixed instead
+   of sticky, which keeps it exactly where it was. */
+body.nav-open { position: fixed; left: 0; right: 0; width: 100%; overflow: hidden; }
+body.nav-open .site-header { position: fixed; top: 0; left: 0; right: 0; }
 
 @media (max-width: 640px) {
   .site-nav { gap: 16px; }
   .nav-hide-mobile { display: none; }
+  /* At 390px the logo, two links and the pill add up to ~400px in a 334px row,
+     so the pill wrapped onto three lines. The links live in the footer too; the
+     button does not, and it is the only thing on this bar with a job. */
+  .header-inner { padding: 13px 20px; }
+  .site-nav a:not(.pill-btn) { font-size: 14px; }
+  .pill-btn { font-size: 13.5px; padding: 8px 15px; }
   .hero { padding: 56px 20px 56px; }
+  /* Every section variant has to be listed. `.section-tight` was the one left
+     behind, so the blocks inside it started 8px further in than their
+     neighbours — which is what read as "not quite centred". */
+  .section-tight { padding: 0 20px 56px; padding-top: 28px; }
   .hero-text { min-width: 0; }
   .section { padding: 56px 20px; }
   .section-cta { padding: 64px 20px 80px; }
+  .site-footer { padding: 28px 20px; }
   .phone-col { transform: rotate(0deg); }
 }
 
@@ -515,83 +661,250 @@ h1 em, .em-accent { font-style: normal; color: var(--accent); }
 
 .ex .ex-crumb { font-size: 14px; color: var(--text-muted); margin-bottom: 14px; }
 .ex .ex-crumb a { color: var(--accent); }
-.ex .ex-lede { font-size: 18px; line-height: 1.6; color: var(--text-body); margin-bottom: 40px; }
+.ex .ex-lede { font-size: 18px; line-height: 1.6; color: var(--text-body); margin-bottom: 36px; }
 .ex .ex-note { font-size: 14px; color: var(--text-faint); }
+.ex .ex-h { font-size: 15px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-muted); margin: 0 0 16px; font-weight: 600; }
 .ex .ex-count {
-  font-size: 14px; font-weight: 500; color: var(--text-muted);
-  border: 1px solid var(--glass-border); border-radius: 999px; padding: 2px 10px; margin-left: 8px;
-  vertical-align: middle;
+  font-size: 13px; font-weight: 500; color: var(--text-muted);
+  border: 1px solid var(--glass-border); border-radius: 999px;
+  padding: 1px 9px; margin-left: 6px; vertical-align: middle;
 }
+.ex-subjects { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+
+/* ---------- Examples: list ---------- */
+
+/* auto-fit + minmax gives 3 columns inside the 1080px container, 2 at tablet and
+   1 on a phone without a single media query — the column count follows the space
+   that is actually there. */
+.ex-grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 14px;
+  /* min() keeps the track from insisting on 290px when the container is narrower —
+     without it the grid overflows on a phone and the whole page drifts sideways. */
+  grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr));
+}
+.ex-grid a {
+  display: grid; gap: 8px; height: 100%; padding: 22px 22px 20px;
+  background: var(--glass-dim); border: 1px solid var(--glass-border);
+  border-radius: 16px; align-content: start;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.ex-grid a:hover { border-color: var(--hover-border); background: var(--glass); }
+/* Keyboard focus is a separate signal from hover: a visitor tabbing through the
+   grid gets no pointer, so the hover border alone would leave them lost. */
+.ex-grid a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ex-tile-subject {
+  font-size: 12.5px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--accent); font-weight: 600;
+}
+.ex-tile-metric {
+  font-size: 19px; font-weight: 800; color: var(--text); line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+}
+.ex-tile-arrow { color: var(--accent); margin: 0 6px; font-weight: 400; }
+.ex-tile-title {
+  font-size: 15px; font-weight: 500; color: var(--text-quote); line-height: 1.45;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* Never truncated: a licence reading "CC BY-NC-SA 4.0" is meaningless cut short,
+   and the licence is the one claim on this card a reader may need to act on. */
+.ex-tile-meta { font-size: 12.5px; color: var(--text-faint); line-height: 1.5; }
+
+/* ---------- Examples: source block ---------- */
 
 .ex-source {
   background: var(--glass-dim); border: 1px solid var(--glass-border);
-  border-radius: 16px; padding: 22px 24px; margin-bottom: 44px;
+  border-radius: 18px; padding: 24px 26px; margin-bottom: 36px;
 }
-.ex-source h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin: 0 0 16px; }
-.ex-source dl { margin: 0; display: grid; gap: 10px; }
-.ex-source dl > div { display: grid; grid-template-columns: 168px 1fr; gap: 12px; }
-.ex-source dt { font-size: 14.5px; color: var(--text-faint); }
-.ex-source dd { margin: 0; font-size: 14.5px; color: var(--text-quote); }
-.ex-source a { color: var(--accent); }
+.ex-source-eyebrow {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--text-muted); margin: 0 0 6px;
+}
+/* The rule under the source name is what separates "what this is" from "the
+   paperwork about it" — without it the five meta cells read as part of the name. */
+.ex-source-name {
+  font-size: 19px; font-weight: 700; line-height: 1.35;
+  margin: 0 0 20px; padding-bottom: 20px;
+  border-bottom: 1px solid var(--divider);
+}
+.ex-source-name a { color: var(--text); }
+.ex-source-name a:hover { color: var(--accent); }
+.ex-source-meta {
+  display: grid; gap: 20px 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+}
+.ex-source-meta span {
+  display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--text-faint); margin-bottom: 5px;
+}
+.ex-source-meta b { font-size: 14.5px; font-weight: 500; color: var(--text-quote); }
+.ex-source-meta a { color: var(--accent); }
 
 .ex-block { margin-bottom: 44px; }
 .ex-transcript {
-  margin: 0 0 10px; padding: 18px 22px;
+  margin: 0 0 10px; padding: 18px 22px; white-space: pre-line;
   border-left: 2px solid var(--hover-border); background: var(--glass-dim);
   border-radius: 0 12px 12px 0;
   font-size: 15px; line-height: 1.7; color: var(--text-quote);
 }
+
+/* ---------- Examples: tabs ---------- */
+
+.ex-tabs {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+  padding: 4px; margin-bottom: 32px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px;
+}
+.ex-tabs button {
+  font: inherit; font-size: 13.5px; font-weight: 600; color: var(--text-body);
+  background: transparent; border: 0; border-radius: 10px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 6px; transition: background 0.25s ease, color 0.25s ease;
+}
+.ex-tabs button:hover { color: #fff; }
+.ex-tabs button.is-active { background: rgba(13, 95, 255, 0.35); color: #fff; }
+.ex-tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ex-tabs .ex-count {
+  font-size: 10.5px; font-weight: 600; color: inherit; margin-left: 0;
+  border: 1px solid rgba(178, 178, 178, 0.3); padding: 1px 6px;
+}
+
+/* ---------- Examples: summary ---------- */
+
 .ex-summary { font-size: 16px; line-height: 1.75; color: var(--text-body); }
-.ex-summary h2 { font-size: 20px; margin: 28px 0 12px; color: var(--text); }
+.ex-summary h2 { font-size: 20px; margin: 30px 0 12px; color: var(--text); }
 .ex-summary h3 { font-size: 17px; margin: 22px 0 10px; color: var(--text); }
 .ex-summary ul, .ex-summary ol { padding-left: 22px; margin: 12px 0; }
 .ex-summary li { margin-bottom: 8px; }
-
-.ex-cards { display: grid; gap: 10px; }
-.ex-card {
-  background: var(--glass-dim); border: 1px solid var(--glass-border); border-radius: 14px;
+.ex-summary strong { color: var(--text-quote); }
+.ex-summary blockquote {
+  margin: 16px 0; padding: 12px 18px; border-left: 2px solid var(--hover-border);
+  color: var(--text-quote);
 }
-.ex-card summary {
-  cursor: pointer; padding: 16px 20px; font-weight: 600; font-size: 15.5px;
-  list-style: none;
+/* The app forces tables in statistical sources, up to six columns. Making the
+   table its own scroll container is what keeps the page body from gaining a
+   horizontal scrollbar on a phone. */
+.ex-summary table {
+  display: block; overflow-x: auto; width: 100%;
+  border-collapse: collapse; margin: 8px 0 20px;
+  border: 1px solid var(--glass-border); border-radius: 12px;
+  font-variant-numeric: tabular-nums;
 }
-.ex-card summary::-webkit-details-marker { display: none; }
-.ex-card summary::after { content: '+'; float: right; color: var(--accent); }
-.ex-card[open] summary::after { content: '−'; }
-.ex-card > div { padding: 0 20px 18px; }
-.ex-card p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--text-body); }
+.ex-summary thead th {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px;
+  color: var(--text-muted); font-weight: 600; text-align: left;
+  background: var(--glass); padding: 11px 14px;
+  border-bottom: 1px solid var(--glass-border); white-space: nowrap;
+}
+.ex-summary tbody td {
+  font-size: 13.5px; color: var(--text-quote); padding: 11px 14px;
+  border-bottom: 1px solid rgba(178, 178, 178, 0.1); white-space: nowrap;
+}
+.ex-summary tbody tr:last-child td { border-bottom: 0; }
 
-.ex-quiz { padding-left: 0; list-style: none; counter-reset: q; display: grid; gap: 22px; }
+/* ---------- Examples: flashcards ---------- */
+
+.ex-cards {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+}
+/* Flip rather than expand — the same gesture as the flashcards in the app. The
+   rotation lives on the inner wrapper so both faces occupy one box; a fixed
+   height keeps front and back the same size whatever the text length. */
+.ex-card { perspective: 1200px; height: 200px; cursor: pointer; border-radius: 16px; }
+.ex-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ex-card-inner {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ex-card.is-flipped .ex-card-inner { transform: rotateY(180deg); }
+.ex-card-face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 22px; border-radius: 16px; text-align: center; box-sizing: border-box;
+  border: 1px solid var(--glass-border);
+  overflow: auto;
+}
+/* The front carries a soft top-lit gradient rather than a flat fill: two faces of
+   the same box need to read as different sides, and a colour shift alone would
+   fight the blue the answer side already uses. */
+.ex-card-front {
+  background: linear-gradient(155deg, rgba(30, 36, 66, 0.9), rgba(10, 13, 26, 0.9));
+}
+.ex-card:hover .ex-card-face { border-color: var(--hover-border); }
+.ex-card-face p { margin: 0; }
+.ex-card-front p { font-size: 15.5px; font-weight: 600; color: var(--text); line-height: 1.45; }
+.ex-card-back {
+  transform: rotateY(180deg);
+  background: rgba(13, 95, 255, 0.14); border-color: rgba(165, 189, 255, 0.35);
+}
+.ex-card-back p { font-size: 14.5px; font-weight: 500; color: #fff; line-height: 1.5; }
+.ex-card-eyebrow {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--accent); margin-bottom: 10px;
+}
+/* Sentence case, not caps: the hint is an instruction to the reader, and setting
+   it in caps gave it the same weight as the answer label above the answer. */
+.ex-flip-hint { margin-top: 14px; font-size: 11.5px; color: var(--text-faint); }
+
+/* ---------- Examples: quiz ---------- */
+
+.ex-quiz { padding-left: 0; list-style: none; counter-reset: q; display: grid; gap: 20px; }
 .ex-quiz > li {
   counter-increment: q;
   background: var(--glass-dim); border: 1px solid var(--glass-border);
   border-radius: 14px; padding: 20px 22px;
 }
+.ex-quiz { gap: 18px; }
 .ex-q { font-weight: 600; font-size: 15.5px; margin: 0 0 12px; }
 .ex-q::before { content: counter(q) '. '; color: var(--text-muted); }
-.ex-quiz ul { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 6px; }
-.ex-quiz ul li { font-size: 15px; color: var(--text-body); padding-left: 22px; position: relative; }
-.ex-quiz ul li::before { content: '○'; position: absolute; left: 0; color: var(--text-faint); }
-.ex-quiz ul li.ex-right { color: var(--text); font-weight: 600; }
-.ex-quiz ul li.ex-right::before { content: '●'; color: var(--accent); }
+.ex-quiz ul { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 7px; }
+.ex-quiz ul > li {
+  font-size: 15px; color: var(--text-body);
+  padding: 8px 12px 8px 32px; border-radius: 10px;
+  position: relative; display: flex; align-items: center; gap: 10px;
+  justify-content: space-between;
+}
+.ex-quiz ul > li::before {
+  content: ''; position: absolute; left: 12px; top: 50%;
+  transform: translateY(-50%);
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 1.5px solid var(--text-faint);
+}
+/* The correct option is marked three ways — filled dot, bold white text and a
+   check icon — because colour alone excludes anyone who cannot distinguish it. */
+.ex-quiz ul > li.ex-right {
+  color: var(--text); font-weight: 700;
+  background: rgba(13, 95, 255, 0.16);
+}
+.ex-quiz ul > li.ex-right::before { background: var(--accent); border-color: var(--accent); }
+.ex-check { flex-shrink: 0; opacity: 0.85; }
 .ex-why { font-size: 14.5px; color: var(--text-faint); margin: 0; line-height: 1.6; }
 
 .ex-cta { text-align: center; padding: 40px 0 8px; border-top: 1px solid var(--divider); }
 .ex-cta h2 { font-size: 24px; margin-bottom: 8px; }
 .ex-cta p { color: var(--text-body); margin-bottom: 22px; }
 
-.ex-subjects { font-size: 14px; color: var(--text-muted); margin-bottom: 26px; }
-.ex-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
-.ex-list a {
-  display: grid; gap: 6px; padding: 20px 22px;
-  background: var(--glass-dim); border: 1px solid var(--glass-border); border-radius: 16px;
-  transition: border-color 0.25s ease;
+/* Printing shows everything: the tab bar is a screen affordance, and a printed
+   page that silently omits two thirds of the content is a broken document. */
+@media print {
+  .ex-tabs { display: none; }
+  [data-panel] { display: block !important; }
+  .ex-card { height: auto; perspective: none; }
+  .ex-card-inner { transform: none !important; transform-style: flat; }
+  .ex-card-face { position: static; backface-visibility: visible; transform: none !important; }
 }
-.ex-list a:hover { border-color: var(--hover-border); }
-.ex-list-subject { font-size: 12.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); }
-.ex-list-title { font-size: 18px; font-weight: 700; color: var(--text); }
-.ex-list-meta { font-size: 13.5px; color: var(--text-faint); }
 
-@media (max-width: 560px) {
-  .ex-source dl > div { grid-template-columns: 1fr; gap: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .ex-card-inner { transition: none; }
 }
+
+/* The list is the one page that wants the full container: three cards need more
+   than the 720px that keeps body text readable on the text-only pages. The
+   example page itself stays narrow — its summary is prose, and prose set 1080px
+   wide is prose nobody finishes. */
+.page-main.ex-wide { max-width: 1080px; }
+.ex-wide .ex-lede { max-width: 640px; }

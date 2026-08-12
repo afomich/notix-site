@@ -10,14 +10,13 @@ import '../styles/styles.css';
 interface Props {
   title: string;
   description: string;
-  /** 'home' carries the section anchors and the App Store button; 'sub' is the short nav. */
+  /** 'home' adds the in-page anchors (#features, #faq); everything else in the
+   *  header is identical on every page. */
   nav?: 'home' | 'sub';
-  /** Marks the current page in the sub nav. */
-  current?: 'support' | 'privacy';
+  /** Marks the current page in the nav. */
+  current?: 'examples' | 'support' | 'privacy';
   /** Extra classes on .page — 404 uses page-flex to pin the footer down. */
   pageClass?: string;
-  /** Full-bleed hero glow on the home page, single soft glow elsewhere. */
-  glow?: 'home' | 'page';
   noindex?: boolean;
   /** Open Graph is only worth carrying on pages meant to be shared. */
   og?: { title: string; description: string };
@@ -29,7 +28,6 @@ const {
   nav = 'sub',
   current,
   pageClass = '',
-  glow = 'page',
   noindex = false,
   og,
 } = Astro.props;
@@ -80,19 +78,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <slot name="head" />
     <script>
       import '../scripts/analytics.js';
+      // site.js now carries the header burger, which every page has — so it loads
+      // from the shell rather than from the two pages that happened to need it.
+      import '../scripts/site.js';
     </script>
   </head>
 
   <body>
     <div class:list={['page', pageClass]}>
-      {glow === 'home' ? (
-        <div class="glow" aria-hidden="true">
-          <div class="glow-a"></div>
-          <div class="glow-b"></div>
-        </div>
-      ) : (
-        <div class="glow-page" aria-hidden="true"></div>
-      )}
+      <!-- The same glow on every page. Sub-pages used to get a single static
+           circle at 0.3 alpha against the home page's two animated ones at 0.57
+           and 0.21 — so the background visibly dropped in brightness the moment
+           you left the home page. One treatment, no jump. -->
+      <div class="glow" aria-hidden="true">
+        <div class="glow-a"></div>
+        <div class="glow-b"></div>
+      </div>
 
       <header class="site-header">
         <div class="header-inner">
@@ -100,34 +101,76 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
             <span class="logo-mark" aria-hidden="true"></span>
             <span class="logo-name">Notix</span>
           </a>
-          <nav class="site-nav">
-            {nav === 'home' ? (
+          <!-- One header everywhere. The two variants that used to live here were
+               the whole reason the sub-pages felt different: the home nav carried
+               the pill button and the sub nav did not, and a pill is taller than a
+               text link, so the header changed height on every navigation. Only the
+               in-page anchors are conditional now — they have nothing to point at
+               off the home page. -->
+          <!-- The burger owns the nav below 640px. Everything stays in one <nav>:
+               the panel is the same list, re-laid-out by CSS, so there is no second
+               copy of the links to keep in sync. -->
+          <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false"
+                  aria-controls="site-nav" data-burger>
+            <span></span><span></span><span></span>
+          </button>
+          <nav class="site-nav" id="site-nav" data-desktop-nav>
+            {nav === 'home' && (
               <>
                 <a href="#features" class="nav-hide-mobile">Features</a>
                 <a href="#faq" class="nav-hide-mobile">FAQ</a>
-                <a href="/examples/">Examples</a>
-                <a href="/support/">Support</a>
-                <a
-                  class="pill-btn"
-                  href="https://apps.apple.com/app/id6758561284"
-                  data-track="app_store_click"
-                  data-placement="nav">Get the app</a
-                >
-              </>
-            ) : (
-              <>
-                <a href="/examples/">Examples</a>
-                <a href="/support/" aria-current={current === 'support' ? 'page' : undefined}
-                  >Support</a
-                >
-                <a href="/privacy/" aria-current={current === 'privacy' ? 'page' : undefined}
-                  >Privacy</a
-                >
               </>
             )}
+            <a href="/examples/" aria-current={current === 'examples' ? 'page' : undefined}
+              >Examples</a
+            >
+            <a href="/support/" aria-current={current === 'support' ? 'page' : undefined}
+              >Support</a
+            >
+            <a
+              class="pill-btn"
+              href="https://apps.apple.com/app/id6758561284"
+              data-track="app_store_click"
+              data-placement="nav">Get the app</a
+            >
           </nav>
         </div>
       </header>
+
+      <!-- The panel is a sibling of the header, not a child of it — it drops from
+           under the header across the full width and sizes to its content, so it
+           cannot live inside the header's row. The scrim below it dims the page
+           and closes the menu on tap. -->
+      <div class="nav-scrim" data-scrim hidden></div>
+      <div class="nav-panel" data-panel-nav>
+        <div class="nav-panel-glow" aria-hidden="true"></div>
+        <div class="nav-panel-inner">
+          {/* The panel mirrors the desktop nav, anchors included — on the home page
+              those two are how you reach Features and FAQ, and dropping them from
+              the mobile menu would leave the sections unreachable on a phone. */}
+          {nav === 'home' && (
+            <>
+              <a href="#features">Features</a>
+              <a href="#faq">FAQ</a>
+            </>
+          )}
+          <a href="/examples/">Examples</a>
+          <a href="/support/">Support</a>
+          <a
+            class="btn-primary nav-panel-cta"
+            href="https://apps.apple.com/app/id6758561284"
+            data-track="app_store_click"
+            data-placement="mobile_nav">Get the app</a
+          >
+          <div class="nav-panel-foot">
+            <div>
+              <a href="/privacy/">Privacy Policy</a>
+              <a href="mailto:support@notix-ai.app">support@notix-ai.app</a>
+            </div>
+            <span>© 2026 Notix</span>
+          </div>
+        </div>
+      </div>
 
       <slot />
 

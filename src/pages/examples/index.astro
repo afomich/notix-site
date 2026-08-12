@@ -12,6 +12,7 @@ const subjects = [...new Set(examples.map((e) => e.data.subject))].sort();
 ---
 
 <Base
+  current="examples"
   title="Examples — what Notix produces, unedited"
   description="Real Notix output from openly licensed lectures, papers and articles: transcripts, summaries, flashcards and quizzes, published as produced."
   og={{
@@ -20,7 +21,7 @@ const subjects = [...new Set(examples.map((e) => e.data.subject))].sort();
       'Openly licensed lectures and papers run through Notix. Summaries, flashcards and quizzes exactly as produced.',
   }}
 >
-  <main class="page-main ex">
+  <main class="page-main ex ex-wide">
     <h1>Examples</h1>
     <p class="ex-lede">
       Openly licensed material run through Notix and published as it came out — no
@@ -35,14 +36,22 @@ const subjects = [...new Set(examples.map((e) => e.data.subject))].sort();
         {subjects.length > 1 && (
           <p class="ex-subjects">{subjects.join(' · ')}</p>
         )}
-        <ul class="ex-list">
+        <ul class="ex-grid">
           {examples.map((e) => (
             <li>
               <a href={`/examples/${e.id}/`}>
-                <span class="ex-list-subject">{e.data.subject}</span>
-                <span class="ex-list-title">{e.data.title}</span>
-                <span class="ex-list-meta">
-                  {e.data.source.publisher} · {e.data.source.extent} · {e.data.source.licence}
+                <span class="ex-tile-subject">{e.data.subject}</span>
+                {/* The metric outranks the title visually on purpose: it answers the
+                    question a visitor actually arrives with — how much work does this
+                    save me. The title says what it is; the metric says why to care. */}
+                <span class="ex-tile-metric">
+                  {e.data.source.extent}
+                  <span class="ex-tile-arrow" aria-hidden="true">→</span>
+                  {e.data.flashcards.length} cards · {e.data.quiz.length} questions
+                </span>
+                <span class="ex-tile-title">{e.data.title}</span>
+                <span class="ex-tile-meta">
+                  {e.data.source.publisher} · {e.data.source.licence}
                 </span>
               </a>
             </li>

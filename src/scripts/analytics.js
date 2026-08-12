@@ -103,7 +103,11 @@
     ".consent-no:hover{border-color:rgba(165,189,255,0.4);color:#fff}" +
     ".consent-yes{background:rgba(13,95,255,0.45);color:#fff;border:1px solid rgba(120,160,255,0.5)}" +
     ".consent-yes:hover{background:rgba(13,95,255,0.7)}" +
+    // flex-basis is the main-axis size: once the bar turns into a column at
+    // 560px, `flex: 1 1 320px` stops meaning "at least 320px wide" and starts
+    // meaning "320px tall", which inflated the banner to most of a phone screen.
     "@media (max-width:560px){.consent{flex-direction:column;align-items:stretch}" +
+    ".consent-text{flex:0 0 auto}" +
     ".consent-actions{justify-content:flex-end}}";
 
   // The banner is built here rather than written into every page, so the four

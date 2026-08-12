@@ -26,7 +26,12 @@ const INPUT_LABEL: Record<string, string> = {
 };
 ---
 
-<Base title={`${d.title} — Notix example`} description={d.description}>
+<Base
+  current="examples"
+  title={d.seoTitle ? `${d.seoTitle} — Notix` : `${d.title} — Notix example`}
+  description={d.description}
+  og={{ title: d.seoTitle ?? d.title, description: d.description }}
+>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
@@ -39,6 +44,7 @@ const INPUT_LABEL: Record<string, string> = {
       license: d.source.licenceUrl ?? undefined,
       publisher: { '@type': 'Organization', name: 'Notix' },
     })} />
+
   </Fragment>
 
   <main class="page-main ex">
@@ -46,56 +52,88 @@ const INPUT_LABEL: Record<string, string> = {
     <h1>{d.title}</h1>
     <p class="ex-lede">{d.description}</p>
 
-    <!-- The provenance block sits above the output on purpose: a summary is only
-         worth anything if you can see what it was made from. -->
+    <!-- Provenance sits above the output and outside the tabs on purpose: a summary
+         is only worth anything if you can see what it was made from, so the source
+         must never be one click away. -->
     <section class="ex-source">
-      <h2>Source</h2>
-      <dl>
-        <div><dt>Material</dt><dd><a href={d.source.url} rel="noopener" target="_blank">{d.source.name}</a></dd></div>
-        <div><dt>Publisher</dt><dd>{d.source.publisher}</dd></div>
-        <div><dt>Licence</dt><dd>
-          {d.source.licenceUrl
+      <p class="ex-source-eyebrow">Source</p>
+      <p class="ex-source-name">
+        <a href={d.source.url} rel="noopener" target="_blank">{d.source.name}</a>
+      </p>
+      <div class="ex-source-meta">
+        <div><span>Publisher</span><b>{d.source.publisher}</b></div>
+        <div>
+          <span>Licence</span>
+          <b>{d.source.licenceUrl
             ? <a href={d.source.licenceUrl} rel="noopener nofollow" target="_blank">{d.source.licence}</a>
-            : d.source.licence}
-        </dd></div>
-        <div><dt>Extent</dt><dd>{d.source.extent}</dd></div>
-        <div><dt>Given to Notix as</dt><dd>{INPUT_LABEL[d.inputType]}</dd></div>
-        <div><dt>Processed</dt><dd>{processed}, app {d.appVersion}</dd></div>
-      </dl>
-    </section>
-
-    <section class="ex-block">
-      <h2>Transcript, first minutes</h2>
-      <blockquote class="ex-transcript">{d.transcriptExcerpt}</blockquote>
-      <p class="ex-note">An excerpt. Notix worked from the full material.</p>
-    </section>
-
-    <section class="ex-block">
-      <h2>Summary Notix produced</h2>
-      <div class="ex-summary"><Content /></div>
-    </section>
-
-    <section class="ex-block">
-      <h2>Flashcards <span class="ex-count">{d.flashcards.length}</span></h2>
-      <div class="ex-cards">
-        {d.flashcards.map((c) => (
-          <details class="ex-card">
-            <summary>{c.front}</summary>
-            <div><p>{c.back}</p></div>
-          </details>
-        ))}
+            : d.source.licence}</b>
+        </div>
+        <div><span>Extent</span><b>{d.source.extent}</b></div>
+        <div><span>Given to Notix as</span><b>{INPUT_LABEL[d.inputType]}</b></div>
+        <div><span>Processed</span><b>{processed}, app {d.appVersion}</b></div>
       </div>
     </section>
 
     <section class="ex-block">
-      <h2>Quiz <span class="ex-count">{d.quiz.length}</span></h2>
+      <h2 class="ex-h">Source, first paragraphs</h2>
+      <blockquote class="ex-transcript">{d.transcriptExcerpt}</blockquote>
+      <p class="ex-note">An excerpt. Notix worked from the full material.</p>
+    </section>
+
+    <!-- Tabs are progressive enhancement. All three panels render server-side and
+         stay in the DOM; the script only sets `hidden` on the inactive two. That is
+         what keeps them crawlable, deep-linkable and printable — and what makes the
+         no-JS fallback correct (everything visible) rather than empty. -->
+    <div class="ex-tabs" data-tabbar role="tablist" aria-label="Example output">
+      <button type="button" role="tab" data-tab="summary" aria-controls="summary">Summary</button>
+      <button type="button" role="tab" data-tab="flashcards" aria-controls="flashcards"
+        >Flashcards <span class="ex-count">{d.flashcards.length}</span></button
+      >
+      <button type="button" role="tab" data-tab="quiz" aria-controls="quiz"
+        >Quiz <span class="ex-count">{d.quiz.length}</span></button
+      >
+    </div>
+
+    <section class="ex-block" id="summary" data-panel>
+      <h2 class="ex-h">Summary Notix produced</h2>
+      <div class="ex-summary"><Content /></div>
+    </section>
+
+    <section class="ex-block" id="flashcards" data-panel>
+      <h2 class="ex-h">Flashcards <span class="ex-count">{d.flashcards.length}</span></h2>
+      <div class="ex-cards">
+        {d.flashcards.map((c) => (
+          <div class="ex-card" tabindex="0" role="button" aria-label={`Flashcard: ${c.front}`}>
+            <div class="ex-card-inner">
+              <div class="ex-card-face ex-card-front">
+                <p>{c.front}</p>
+                <span class="ex-flip-hint"><span aria-hidden="true">⇄</span> Tap to flip</span>
+              </div>
+              <div class="ex-card-face ex-card-back">
+                <span class="ex-card-eyebrow">Answer</span>
+                <p>{c.back}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="ex-block" id="quiz" data-panel>
+      <h2 class="ex-h">Quiz <span class="ex-count">{d.quiz.length}</span></h2>
       <ol class="ex-quiz">
         {d.quiz.map((q) => (
           <li>
             <p class="ex-q">{q.question}</p>
             <ul>
               {q.options.map((o, i) => (
-                <li class={i === q.answer ? 'ex-right' : ''}>{o}</li>
+                <li class={i === q.answer ? 'ex-right' : ''}>
+                  <span>{o}</span>
+                  {i === q.answer && (
+                    <img src="/assets/icons/check.svg" alt="Correct answer"
+                         width="15" height="15" class="ex-check" />
+                  )}
+                </li>
               ))}
             </ul>
             <p class="ex-why">{q.explanation}</p>
