@@ -242,7 +242,7 @@ export const it = {
     reportingIntro: 'Per sistemare tutto più in fretta, aggiungi:',
     reportingItems: [
       'Modello del dispositivo e versione di iOS',
-      'Versione dell’app (Impostazioni → Info)',
+      'La versione di Notix, se la conosci',
       'Cosa hai fatto, cosa ti aspettavi e cosa è successo invece',
       'Uno screenshot o una registrazione dello schermo, se possibile',
     ],

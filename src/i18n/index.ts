@@ -14,6 +14,7 @@ import { de } from './de';
 import { pl } from './pl';
 import { fr } from './fr';
 import { es } from './es';
+import { it } from './it';
 import type { Dictionary } from './en';
 
 export type { Dictionary };
@@ -27,6 +28,7 @@ export const LOCALES = {
   pl,
   fr,
   es,
+  it,
 } satisfies Record<string, Dictionary>;
 
 export type LocaleCode = keyof typeof LOCALES;
