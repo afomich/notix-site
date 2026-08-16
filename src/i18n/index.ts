@@ -10,6 +10,9 @@
  */
 import { en } from './en';
 import { ru } from './ru';
+import { de } from './de';
+import { pl } from './pl';
+import { fr } from './fr';
 import type { Dictionary } from './en';
 
 export type { Dictionary };
@@ -19,6 +22,9 @@ export const DEFAULT_LOCALE = 'en';
 export const LOCALES = {
   en,
   ru,
+  de,
+  pl,
+  fr,
 } satisfies Record<string, Dictionary>;
 
 export type LocaleCode = keyof typeof LOCALES;
