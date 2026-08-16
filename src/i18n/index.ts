@@ -30,6 +30,7 @@ import { el } from './el';
 import { fi } from './fi';
 import { hu } from './hu';
 import { th } from './th';
+import { zh } from './zh';
 import type { Dictionary } from './en';
 
 export type { Dictionary };
@@ -59,6 +60,7 @@ export const LOCALES = {
   fi,
   hu,
   th,
+  zh,
 } satisfies Record<string, Dictionary>;
 
 export type LocaleCode = keyof typeof LOCALES;
