@@ -260,7 +260,7 @@ export const ja = {
 
     accountTitle: 'アカウントとデータ',
     accountTextLead: 'アカウントと関連するデータは、アプリ内で削除できます：',
-    accountSettingsPath: '設定 → アカウント情報 → アカウントを削除',
+    accountSettingsPath: 'Settings → Account details → Delete account',
     accountTextTail:
       'アカウントとデータは30日後に完全に削除されます。その間にもう一度ログインすれば、削除は取り消されます。',
     accountPrivacyLead: 'データについてのご質問は',

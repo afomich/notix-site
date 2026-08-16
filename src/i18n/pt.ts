@@ -261,7 +261,7 @@ export const pt = {
     accountTitle: 'Conta e dados',
     accountTextLead:
       'Você pode excluir sua conta e todos os dados associados direto no app:',
-    accountSettingsPath: 'Ajustes → Dados da conta → Excluir conta',
+    accountSettingsPath: 'Settings → Account details → Delete account',
     accountTextTail:
       'Sua conta e seus dados são excluídos em definitivo depois de 30 dias; se você entrar de novo dentro desse prazo, a exclusão é cancelada.',
     accountPrivacyLead: 'Para dúvidas sobre dados, veja nossa',

@@ -296,7 +296,13 @@ export const en = {
     accountTitle: 'Account & data',
     accountTextLead:
       'You can delete your account and all associated data directly in the app:',
-    accountSettingsPath: 'Settings → Account Details → Delete account',
+    // ПРАВИЛО: это экраны ВНУТРИ Notix, а интерфейс приложения существует только на
+    // шести языках (en, es, fr, de, ru, pl). В остальных локалях путь остаётся
+    // английским — швед, прочитавший «Kontouppgifter», откроет приложение и увидит
+    // «Account details». Названия сверяются с composeResources/values-<lang>/strings.xml.
+    // Путь в billingSettingsPath — наоборот, настройки самой iOS, и Apple переводит их
+    // на все языки, поэтому он локализуется всегда.
+    accountSettingsPath: 'Settings → Account details → Delete account',
     accountTextTail:
       'Your account and data are permanently deleted after 30 days; logging back in within that period cancels the deletion.',
     accountPrivacyLead: 'For data questions, see our',

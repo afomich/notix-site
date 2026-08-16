@@ -255,7 +255,7 @@ export const nl = {
 
     accountTitle: 'Account en gegevens',
     accountTextLead: 'Je kunt je account en alle bijbehorende gegevens direct in de app verwijderen:',
-    accountSettingsPath: 'Instellingen → Accountgegevens → Account verwijderen',
+    accountSettingsPath: 'Settings → Account details → Delete account',
     accountTextTail:
       'Je account en gegevens worden na 30 dagen definitief verwijderd; log je binnen die periode weer in, dan gaat de verwijdering niet door.',
     accountPrivacyLead: 'Vragen over gegevens? Lees ons',

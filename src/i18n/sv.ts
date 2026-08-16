@@ -260,7 +260,7 @@ export const sv = {
 
     accountTitle: 'Konto och data',
     accountTextLead: 'Du kan radera ditt konto och all tillhörande data direkt i appen:',
-    accountSettingsPath: 'Inställningar → Kontouppgifter → Radera konto',
+    accountSettingsPath: 'Settings → Account details → Delete account',
     accountTextTail:
       'Ditt konto och din data raderas permanent efter 30 dagar; loggar du in igen inom den perioden avbryts raderingen.',
     accountPrivacyLead: 'Frågor om data? Läs vår',

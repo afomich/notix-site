@@ -253,7 +253,7 @@ export const ko = {
 
     accountTitle: '계정과 데이터',
     accountTextLead: '계정과 관련된 모든 데이터는 앱에서 바로 삭제할 수 있어요:',
-    accountSettingsPath: '설정 → 계정 정보 → 계정 삭제',
+    accountSettingsPath: 'Settings → Account details → Delete account',
     accountTextTail:
       '계정과 데이터는 30일 뒤에 완전히 삭제돼요. 그 기간 안에 다시 로그인하면 삭제가 취소돼요.',
     accountPrivacyLead: '데이터 관련 문의는',

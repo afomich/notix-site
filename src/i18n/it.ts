@@ -257,7 +257,7 @@ export const it = {
     accountTitle: 'Account e dati',
     accountTextLead:
       'Puoi eliminare il tuo account e tutti i dati collegati direttamente nell’app:',
-    accountSettingsPath: 'Impostazioni → Dati account → Elimina account',
+    accountSettingsPath: 'Settings → Account details → Delete account',
     accountTextTail:
       'Account e dati vengono eliminati definitivamente dopo 30 giorni; se rientri entro quel periodo, l’eliminazione si annulla.',
     accountPrivacyLead: 'Per le domande sui dati, guarda la nostra',
