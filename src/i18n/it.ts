@@ -217,7 +217,7 @@ export const it = {
     },
     {
       q: 'Notix è gratis?',
-      a: 'Notix è gratis per iniziare: puoi registrare, creare appunti e fare quiz e flashcard senza pagare. Notix Pro toglie i limiti — ore di registrazione illimitate, domande dei quiz illimitate, riassunti di PDF e video — a 17,99 $ al mese con 3 giorni di prova gratuita, oppure 99,99 $ all’anno con 7 giorni di prova gratuita. Prima della fine della prova non viene addebitato nulla.',
+      a: 'Notix è gratis per iniziare: puoi registrare, creare appunti e fare quiz e flashcard senza pagare. Notix Pro toglie i limiti — ore di registrazione illimitate, domande dei quiz illimitate, riassunti di PDF e video. C’è un piano mensile con 3 giorni di prova gratuita e uno annuale con 7 giorni di prova gratuita: il prezzo esatto nella tua valuta lo vedi sull’App Store. Prima della fine della prova non viene addebitato nulla.',
     },
     {
       q: 'Posso disdire quando voglio?',

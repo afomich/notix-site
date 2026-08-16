@@ -242,6 +242,12 @@ export const en = {
       a: 'Transcription and summarisation run on our servers, so you need a connection to turn audio or a PDF into notes. Everything already generated is cached on your device, so your notes, summaries, quizzes, and flashcards are readable offline — on a plane or in a basement with no signal, your library is still there.',
     },
     {
+      // ПРАВИЛО ДЛЯ ПЕРЕВОДЧИКОВ: конкретные суммы остаются ТОЛЬКО в английской
+      // версии. App Store берёт деньги в валюте витрины по собственной ценовой
+      // сетке, поэтому «17,99 $» на немецкой или японской странице — это цена,
+      // которую покупатель никогда не увидит на кассе. В локализованных версиях
+      // называем структуру (месячный и годовой план, 3 и 7 дней пробного периода —
+      // они одинаковы везде) и отсылаем за суммой в App Store своей страны.
       q: 'Is Notix free?',
       a: 'Notix is free to start: you can record, create notes, and make quizzes and flashcards without paying. Notix Pro removes the limits — unlimited recording hours, unlimited quiz questions, and PDF and video summarisation — at $17.99 per month with a 3-day free trial, or $99.99 per year with a 7-day free trial. Nothing is charged before the trial ends.',
     },

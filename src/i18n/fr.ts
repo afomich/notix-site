@@ -218,7 +218,7 @@ export const fr = {
     },
     {
       q: 'Notix est-il gratuit ?',
-      a: 'Notix est gratuit pour commencer : tu peux enregistrer, créer des notes et faire des quiz et des fiches sans payer. Notix Pro lève les limites — heures d’enregistrement illimitées, questions de quiz illimitées, et résumé des PDF et des vidéos — à 17,99 $ par mois avec un essai gratuit de 3 jours, ou 99,99 $ par an avec un essai gratuit de 7 jours. Rien n’est débité avant la fin de l’essai.',
+      a: 'Notix est gratuit pour commencer : tu peux enregistrer, créer des notes et faire des quiz et des fiches sans payer. Notix Pro lève les limites — heures d’enregistrement illimitées, questions de quiz illimitées, et résumé des PDF et des vidéos. Il existe une formule mensuelle avec un essai gratuit de 3 jours et une formule annuelle avec un essai gratuit de 7 jours — le prix exact dans ta devise s’affiche sur l’App Store. Rien n’est débité avant la fin de l’essai.',
     },
     {
       q: 'Peut-on annuler l’abonnement à tout moment ?',

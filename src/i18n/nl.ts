@@ -216,7 +216,7 @@ export const nl = {
     },
     {
       q: 'Is Notix gratis?',
-      a: 'Notix is gratis te proberen: je kunt opnemen, notities maken en oefenvragen en flashcards genereren zonder te betalen. Notix Pro haalt de limieten weg — onbeperkt opnemen, onbeperkt oefenvragen, en samenvattingen van PDF-bestanden en video’s — voor $ 17,99 per maand met 3 dagen gratis proefperiode, of $ 99,99 per jaar met 7 dagen gratis proefperiode. Er wordt niets afgeschreven voordat de proefperiode afloopt.',
+      a: 'Notix is gratis te proberen: je kunt opnemen, notities maken en oefenvragen en flashcards genereren zonder te betalen. Notix Pro haalt de limieten weg — onbeperkt opnemen, onbeperkt oefenvragen, en samenvattingen van PDF-bestanden en video’s. Er is een maandabonnement met 3 dagen gratis proefperiode en een jaarabonnement met 7 dagen gratis proefperiode — de exacte prijs in jouw valuta zie je in de App Store. Er wordt niets afgeschreven voordat de proefperiode afloopt.',
     },
     {
       q: 'Kan ik altijd opzeggen?',

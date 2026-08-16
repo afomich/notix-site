@@ -213,7 +213,7 @@ export const pl = {
     },
     {
       q: 'Czy Notix jest darmowy?',
-      a: 'Notix możesz zacząć za darmo: nagrywasz, tworzysz notatki, robisz quizy i fiszki bez płacenia. Notix Pro zdejmuje limity — nielimitowane godziny nagrań, nielimitowane pytania w quizach oraz podsumowania PDF-ów i filmów — za 17,99 $ miesięcznie z 3-dniowym okresem próbnym albo 99,99 $ rocznie z 7-dniowym okresem próbnym. Przed końcem okresu próbnego nic nie zostaje pobrane.',
+      a: 'Notix możesz zacząć za darmo: nagrywasz, tworzysz notatki, robisz quizy i fiszki bez płacenia. Notix Pro zdejmuje limity — nielimitowane godziny nagrań, nielimitowane pytania w quizach oraz podsumowania PDF-ów i filmów. Jest plan miesięczny z 3-dniowym okresem próbnym i roczny z 7-dniowym — dokładną cenę w swojej walucie zobaczysz w App Store. Przed końcem okresu próbnego nic nie zostaje pobrane.',
     },
     {
       q: 'Czy mogę anulować subskrypcję w każdej chwili?',

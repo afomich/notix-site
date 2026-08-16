@@ -219,7 +219,7 @@ export const es = {
     },
     {
       q: '¿Notix es gratis?',
-      a: 'Notix es gratis para empezar: puedes grabar, crear apuntes y hacer cuestionarios y tarjetas de estudio sin pagar. Notix Pro quita los límites — horas de grabación ilimitadas, preguntas de cuestionario ilimitadas y resúmenes de PDF y video — por 17,99 $ al mes con 3 días de prueba gratis, o 99,99 $ al año con 7 días de prueba gratis. No se cobra nada antes de que termine la prueba.',
+      a: 'Notix es gratis para empezar: puedes grabar, crear apuntes y hacer cuestionarios y tarjetas de estudio sin pagar. Notix Pro quita los límites — horas de grabación ilimitadas, preguntas de cuestionario ilimitadas y resúmenes de PDF y video. Hay un plan mensual con 3 días de prueba gratis y uno anual con 7 días de prueba gratis; el precio exacto en tu moneda aparece en la App Store. No se cobra nada antes de que termine la prueba.',
     },
     {
       q: '¿Puedo cancelar cuando quiera?',

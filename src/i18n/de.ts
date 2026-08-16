@@ -213,7 +213,7 @@ export const de = {
     },
     {
       q: 'Ist Notix kostenlos?',
-      a: 'Notix ist kostenlos zum Starten: Du kannst aufnehmen, Notizen erstellen und Quiz und Karteikarten machen, ohne zu zahlen. Notix Pro hebt die Limits auf — unbegrenzte Aufnahmestunden, unbegrenzte Quizfragen sowie Zusammenfassungen von PDFs und Videos — für 17,99 $ pro Monat mit 3 Tagen kostenlos oder 99,99 $ pro Jahr mit 7 Tagen kostenlos. Vor dem Ende des Testzeitraums wird nichts abgebucht.',
+      a: 'Notix ist kostenlos zum Starten: Du kannst aufnehmen, Notizen erstellen und Quiz und Karteikarten machen, ohne zu zahlen. Notix Pro hebt die Limits auf — unbegrenzte Aufnahmestunden, unbegrenzte Quizfragen sowie Zusammenfassungen von PDFs und Videos. Es gibt ein Monats-Abo mit 3 Tagen kostenlos und ein Jahres-Abo mit 7 Tagen kostenlos — den genauen Preis in deiner Währung siehst du im App Store. Vor dem Ende des Testzeitraums wird nichts abgebucht.',
     },
     {
       q: 'Kann ich jederzeit kündigen?',
