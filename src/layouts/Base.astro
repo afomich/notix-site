@@ -154,7 +154,10 @@ const languageLinks =
               локаль не превращается в дубль. */}
           <div class="lang-hint" data-lang-hint hidden>
             <span data-lang-hint-text></span>
-            <a data-lang-hint-cta href="/">{t.languageBanner.cta}</a>
+            {/* Подпись ставит скрипт: это название целевого языка на нём самом.
+                `cta` остаётся aria-label, чтобы ссылка была понятна с экранного
+                диктора, где голое «Русский» ни о чём не говорит. */}
+            <a data-lang-hint-cta href="/" aria-label={t.languageBanner.cta}></a>
             <button type="button" data-lang-hint-dismiss aria-label={t.languageBanner.dismiss}
               >×</button
             >

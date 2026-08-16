@@ -30,11 +30,12 @@ if (dataEl && hint) {
       : undefined;
 
     if (match && match.code !== current && chosen !== 'dismissed' && chosen !== current) {
-      hint.querySelector('[data-lang-hint-text]').textContent = template.replace(
-        '{language}',
-        match.name
-      );
+      hint.querySelector('[data-lang-hint-text]').textContent = template;
+      // Подпись ссылки — само название языка на нём самом. Подставлять его внутрь
+      // фразы нельзя: польскому нужен локатив, нидерландскому артикль, русскому
+      // предложный падеж — а название всегда приходит в именительном.
       const cta = hint.querySelector('[data-lang-hint-cta]');
+      cta.textContent = match.name;
       cta.href = match.href;
       cta.setAttribute('lang', match.code);
       cta.addEventListener('click', () => localStorage.setItem(STORAGE_KEY, match.code));

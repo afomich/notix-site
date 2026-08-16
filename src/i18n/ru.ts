@@ -30,7 +30,7 @@ export const ru = {
   },
 
   languageBanner: {
-    text: 'Эта страница есть на языке {language}',
+    text: 'Эта страница есть и на твоём языке',
     cta: 'Перейти',
     dismiss: 'Закрыть',
   },

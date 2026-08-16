@@ -37,7 +37,7 @@ export const ko = {
   },
 
   languageBanner: {
-    text: '이 페이지는 {language}로도 볼 수 있어요',
+    text: '이 페이지는 사용하시는 언어로도 볼 수 있어요',
     cta: '이동',
     dismiss: '닫기',
   },
@@ -240,7 +240,7 @@ export const ko = {
     reportingIntro: '더 빨리 고칠 수 있도록 아래 내용을 함께 보내주세요:',
     reportingItems: [
       '기기 모델과 iOS 버전',
-      '앱 버전 (설정 → 앱 정보)',
+      'Notix 버전 (아신다면)',
       '무엇을 했고, 무엇을 기대했고, 대신 무슨 일이 일어났는지',
       '가능하다면 스크린샷이나 화면 녹화',
     ],

@@ -16,6 +16,8 @@ import { fr } from './fr';
 import { es } from './es';
 import { it } from './it';
 import { nl } from './nl';
+import { ja } from './ja';
+import { ko } from './ko';
 import type { Dictionary } from './en';
 
 export type { Dictionary };
@@ -31,6 +33,8 @@ export const LOCALES = {
   es,
   it,
   nl,
+  ja,
+  ko,
 } satisfies Record<string, Dictionary>;
 
 export type LocaleCode = keyof typeof LOCALES;

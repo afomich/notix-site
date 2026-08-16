@@ -37,7 +37,7 @@ export const nl = {
   },
 
   languageBanner: {
-    text: 'Deze pagina is beschikbaar in het {language}',
+    text: 'Deze pagina is er ook in jouw taal',
     cta: 'Overschakelen',
     dismiss: 'Sluiten',
   },

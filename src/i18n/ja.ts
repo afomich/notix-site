@@ -29,7 +29,7 @@ export const ja = {
   nav: {
     features: '機能',
     faq: 'よくある質問',
-    examples: '事例',
+    examples: 'サンプル',
     support: 'サポート',
     getApp: 'アプリを入手',
     menu: 'メニュー',
@@ -42,7 +42,7 @@ export const ja = {
   },
 
   languageBanner: {
-    text: 'このページは{language}でもご覧いただけます',
+    text: 'このページはお使いの言語でもご覧いただけます',
     cta: '切り替える',
     dismiss: '閉じる',
   },
@@ -246,7 +246,7 @@ export const ja = {
     reportingIntro: '早く直せるよう、次の情報を書き添えてください：',
     reportingItems: [
       'ご利用の端末とiOSのバージョン',
-      'アプリのバージョン（設定 → このアプリについて）',
+      'Notixのバージョン（わかれば）',
       '何をして、どうなると思っていて、実際に何が起きたか',
       '可能であればスクリーンショットか画面収録',
     ],

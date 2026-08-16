@@ -41,9 +41,15 @@ export const en = {
     copyright: '© 2026 Notix',
   },
 
-  /** Полоска с предложением перейти на свой язык. {language} — название языка. */
+  /**
+   * Полоска с предложением перейти на свой язык.
+   *
+   * Название языка в текст НЕ подставляется: оно всегда приходит в именительном
+   * падеже, а польскому нужен локатив, нидерландскому артикль, русскому
+   * предложный. Название языка — это подпись ссылки, `cta` служит её aria-label.
+   */
   languageBanner: {
-    text: 'This page is available in {language}',
+    text: 'This page is also available in your language',
     cta: 'Switch',
     dismiss: 'Dismiss',
   },

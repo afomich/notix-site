@@ -40,7 +40,7 @@ export const es = {
   },
 
   languageBanner: {
-    text: 'Esta página está disponible en {language}',
+    text: 'Esta página también está en tu idioma',
     cta: 'Cambiar',
     dismiss: 'Cerrar',
   },

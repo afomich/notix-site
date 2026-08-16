@@ -34,7 +34,7 @@ export const de = {
   },
 
   languageBanner: {
-    text: 'Diese Seite gibt es auch auf {language}',
+    text: 'Diese Seite gibt es auch in deiner Sprache',
     cta: 'Wechseln',
     dismiss: 'Schließen',
   },
