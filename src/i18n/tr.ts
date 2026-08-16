@@ -57,7 +57,7 @@ export const tr = {
 
     hero: {
       badge: 'iPhone için yapay zeka ders arkadaşı',
-      titleLead: "Ders, PDF ve videoları",
+      titleLead: 'Ders, PDF ve videoları',
       titleEmphasis: 'seni sınava hazırlayan notlara çevir',
       subtitle:
         'Dersi kaydet, PDF yükle ya da YouTube bağlantısını yapıştır. Notix sesi yazıya çevirir, anlaşılır bir özet yazar ve bundan test ile bilgi kartı üretir — sen tekrar okumak yerine gerçekten öğren.',
@@ -196,7 +196,7 @@ export const tr = {
       a: 'Notix, üzerinde çalışabileceğin kadar doğru yazıya çeviriyor ve her hafta daha iyi oluyor — en çok uğraştığımız iki şey hız ve kalite, ikisi de son aylarda belirgin şekilde ilerledi. Normal bir odada net konuşma neredeyse kelimesi kelimesine geri gelir. Gürültülü bir salon, uzaktaki bir mikrofon ya da ağır bir aksan daha zordur; hatalar en çok teknik terimlerde ve özel isimlerde toplanır — bu yüzden belirli bir sayıya ya da isme güvenmeden önce metne bir göz atmakta fayda var.',
     },
     {
-      q: "PDF ve belgelerden özet çıkarabilir miyim?",
+      q: 'PDF ve belgelerden özet çıkarabilir miyim?',
       a: 'Evet. PDF, Word belgesi, metin dosyası ya da tablo yükle — PDF, DOCX, TXT, RTF, CSV, XLS ve XLSX destekleniyor — Notix içinde arama yapabileceğin, kendini test edebileceğin ya da bilgi kartına çevirebileceğin düzenli bir özet üretsin. PDF olarak dışa aktarılmış sunumlar özellikle iyi çalışır, çünkü özet slaytların atladığı bağlantıları tamamlar.',
     },
     {
@@ -260,7 +260,7 @@ export const tr = {
 
     accountTitle: 'Hesap ve veriler',
     accountTextLead: 'Hesabını ve tüm verilerini doğrudan uygulamadan silebilirsin:',
-    accountSettingsPath: 'Ayarlar → Hesap Bilgileri → Hesabı sil',
+    accountSettingsPath: 'Settings → Account details → Delete account',
     accountTextTail:
       'Hesabın ve verilerin 30 gün sonra kalıcı olarak silinir; bu süre içinde tekrar giriş yaparsan silme iptal olur.',
     accountPrivacyLead: 'Verilerle ilgili sorular için',
