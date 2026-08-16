@@ -241,7 +241,7 @@ export const nl = {
     reportingIntro: 'Zodat we het sneller kunnen oplossen, stuur je mee:',
     reportingItems: [
       'Je apparaat en iOS-versie',
-      'De app-versie (Instellingen → Over)',
+      'De Notix-versie, als je die weet',
       'Wat je deed, wat je verwachtte en wat er in plaats daarvan gebeurde',
       'Een screenshot of schermopname, als dat lukt',
     ],
