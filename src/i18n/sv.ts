@@ -234,7 +234,7 @@ export const sv = {
   ],
 
   support: {
-    seoTitle: 'Support — Notix',
+    seoTitle: 'Support och hjälp — Notix',
     seoDescription:
       'Hjälp med Notix — AI Note Taker. Kontakta supporten, rapportera en bugg eller ställ en fråga om ditt abonnemang.',
     title: 'Support',

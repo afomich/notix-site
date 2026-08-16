@@ -237,7 +237,7 @@ export const da = {
   ],
 
   support: {
-    seoTitle: 'Support — Notix',
+    seoTitle: 'Support og hjælp — Notix',
     seoDescription:
       'Hjælp til Notix — AI Note Taker. Kontakt supporten, rapportér en fejl, eller spørg om dit abonnement.',
     title: 'Support',

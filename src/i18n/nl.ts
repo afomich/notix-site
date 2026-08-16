@@ -229,7 +229,7 @@ export const nl = {
   ],
 
   support: {
-    seoTitle: 'Support — Notix',
+    seoTitle: 'Support en hulp — Notix',
     seoDescription:
       'Hulp bij Notix — AI Note Taker. Neem contact op met support, meld een bug of stel een vraag over je abonnement.',
     title: 'Support',

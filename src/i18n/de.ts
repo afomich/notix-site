@@ -226,7 +226,7 @@ export const de = {
   ],
 
   support: {
-    seoTitle: 'Support — Notix',
+    seoTitle: 'Support und Hilfe — Notix',
     seoDescription:
       'Hilfe zu Notix — AI Note Taker. Schreib unserem Support, melde einen Fehler oder klär Fragen zu deinem Abo.',
     title: 'Support',

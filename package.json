@@ -13,6 +13,7 @@
     "check:faq": "node scripts/check-faq.mjs",
     "check:hreflang": "node scripts/check-hreflang.mjs",
     "check:prices": "node scripts/check-prices.mjs",
+    "seo:indexnow": "node scripts/indexnow.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

@@ -1,23 +1,40 @@
 # Notix
 
-> Notix is an iOS note-taking app for iPhone that turns lectures, PDFs, YouTube videos, and voice recordings into clear, structured notes — then helps you learn them with AI-generated quizzes, flashcards, and source-linked AI chat. Free to start; the Notix Pro subscription unlocks unlimited recording hours, unlimited quiz questions, and video & PDF summarization. Interface and AI output are available in English, Spanish, French, German, and Russian.
+> Notix is an AI note taker for iPhone. It records lectures, meetings and interviews, transcribes them, and writes structured summaries — and does the same with uploaded documents, YouTube videos, web articles and social posts. Any summary can be turned into quizzes and flashcards. Free to start; Notix Pro removes the limits on recording hours, quiz questions, and PDF and video summarisation.
 
 Facts an agent can rely on (all mirrored on the pages below):
 
-- Platform: iOS (iPhone). App Store: https://apps.apple.com/app/id6758561284
-- Inputs: live lecture recording, audio file upload, PDF and document upload, YouTube and web links.
-- Outputs: automatic transcript, structured summary, quizzes, flashcards, AI chat with answers linked to sources, PDF export.
-- Sign-in: Google or Apple only; no passwords are stored by Notix.
-- Account deletion is available in-app (Settings → Account Details → Delete account) with a 30-day grace period.
-- Billing is handled by Apple; subscriptions are managed in iOS Settings → Subscriptions.
+- Platform: iPhone. App Store: https://apps.apple.com/app/id6758561284
+- Inputs: live recording, audio file upload, documents (PDF, DOCX, TXT, RTF, CSV, XLS, XLSX), YouTube links, web articles, and posts from TikTok, Instagram, X and Reddit.
+- Outputs: transcript, structured summary, quizzes, flashcards, AI chat with answers linked to their source, PDF export.
+- YouTube summaries are built from the video's captions; a video with captions disabled cannot be summarised.
+- Sign-in: Google, Apple, or email and password.
+- Transcription and summarisation run on Notix servers, so they need a connection. Content already generated is cached on the device and readable offline.
+- An uploaded document is deleted from Notix servers once it has been processed; the transcript and summary remain.
+- A deleted note leaves the library immediately and is erased permanently after 30 days.
+- User content is not used to train AI models and is not sold.
+- Account deletion is available in-app (Settings → Account details → Delete account) with a 30-day grace period.
+- Billing is handled by Apple; subscriptions are managed in iOS Settings → Subscriptions. A monthly plan carries a 3-day free trial, an annual plan a 7-day free trial.
+- App interface languages: English, Spanish, French, German, Russian, Polish. Transcription and summaries are not limited to those six.
 - Support contact: support@notix-ai.app
 
 ## Core pages
 
 - [Home](https://notix-ai.app/): product overview, how it works, features, FAQ
 - [Examples](https://notix-ai.app/examples/): real Notix output from openly licensed lectures, papers and articles — transcript excerpt, summary, flashcards and quiz, published unedited, each with its source, licence and processing date
-- [Support](https://notix-ai.app/support/): contact, bug reports, billing and refunds, account deletion
+- [Support](https://notix-ai.app/support/): contact, bug reports, billing and refunds, account deletion, rules on recording
 - [Privacy Policy](https://notix-ai.app/privacy/): what data is collected, AI processing, retention, user rights
+
+## Languages
+
+The home page and the support page are published in 23 languages. English lives at the
+root; every other language sits under its own prefix, and each page declares the full
+set through hreflang.
+
+/cs/ /da/ /de/ /el/ /es/ /fi/ /fr/ /hu/ /it/ /ja/ /ko/ /nl/ /no/ /pl/ /pt/ /ro/ /ru/
+/sv/ /th/ /tr/ /uk/ /zh/
+
+Examples and the privacy policy are published in English only.
 
 ## Optional
 
