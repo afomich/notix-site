@@ -467,7 +467,7 @@ git commit -m "content(site): правила записи переезжают �
 Деплой выполняется **только после** подтверждения, что бек перестал хранить `audio_file` после успешной транскрипции. До этого ответ №7 утверждает на публичной странице то, что ещё не соответствует действительности.
 
 - [ ] `npm run build` проходит без ошибок и предупреждений
-- [ ] `npm run check:faq` → `OK: 11 questions, JSON-LD and HTML agree`
+- [ ] `npm run check:faq` → `OK: 10 questions, JSON-LD and HTML agree`
 - [ ] В `src/pages/index.astro` не осталось ни одного захардкоженного `<details class="faq-item">` с текстом вопроса: `grep -c 'faq-q">[A-Z]' src/pages/index.astro` → `0`
 - [ ] Rich Results Test (https://search.google.com/test/rich-results) принимает `FAQPage` на собранной странице
 - [ ] Alex подтвердил правку бека по аудио
