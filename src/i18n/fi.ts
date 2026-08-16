@@ -15,6 +15,8 @@
  * Английские термины оставлены там, где финский эквивалент означает другое:
  * «flashcards» (880) против «muistikortit» (210) — последнее в финском прежде
  * всего карта памяти для камеры, отсюда и HIGH-конкуренция интернет-магазинов.
+ * «quiz» (1900) — живое финское заимствование, а «harjoituskysymykset» не ищут
+ * вовсе (0), поэтому в заголовках стоит quiz, а склоняемая форма — «quiz-kysymykset».
  * «AI Note Taker» (70) держится только как категория бренда в ogTitle; вести на
  * него заголовок в Финляндии нечего.
  *
@@ -55,22 +57,22 @@ export const fi = {
 
   home: {
     seoTitle:
-      'Notix — AI Note Taker: litteroi luennot, tiivistä PDF ja YouTube, tee harjoituskysymykset ja flashcards',
+      'Notix — AI Note Taker: litteroi luennot, tiivistä PDF ja YouTube, tee quiz ja flashcards',
     seoDescription:
-      'Notix nauhoittaa luennot ja palaverit, litteroi puheesta tekstiksi ja tekee tiivistelmän PDF:stä tai YouTube-videosta. Harjoituskysymykset ja flashcards syntyvät samalla. Aloitus ilmaiseksi iPhonella.',
+      'Notix nauhoittaa luennot ja palaverit, litteroi puheesta tekstiksi ja tekee tiivistelmän PDF:stä tai YouTube-videosta. Quiz ja flashcards syntyvät samalla. Aloitus ilmaiseksi iPhonella.',
     ogTitle: 'Notix — AI Note Taker',
     ogDescription:
-      'Tee luennoista, PDF-tiedostoista ja YouTube-videoista muistiinpanot, harjoituskysymykset ja flashcards. Kysy muistiinpanoiltasi ja ole valmiina tenttiin nopeammin.',
+      'Tee luennoista, PDF-tiedostoista ja YouTube-videoista muistiinpanot, quiz ja flashcards. Kysy muistiinpanoiltasi ja ole valmiina tenttiin nopeammin.',
     ogImageAlt: 'Notix — luennoista ja PDF-tiedostoista muistiinpanot, joista oikeasti opit',
     schemaDescription:
-      'Notix tekee luennoista, PDF-tiedostoista, YouTube-videoista ja äänitallenteista selkeät muistiinpanot, harjoituskysymykset ja flashcards. Litteroi, tiivistä ja kysy muistiinpanoiltasi.',
+      'Notix tekee luennoista, PDF-tiedostoista, YouTube-videoista ja äänitallenteista selkeät muistiinpanot, quizit ja flashcards. Litteroi, tiivistä ja kysy muistiinpanoiltasi.',
 
     hero: {
       badge: 'Tekoälykaveri opiskeluun iPhonella',
       titleLead: 'Luennosta, PDF:stä tai videosta muistiinpanot, joista',
       titleEmphasis: 'oikeasti opit',
       subtitle:
-        'Nauhoita luento, lataa PDF tai liitä YouTube-linkki. Notix litteroi sen, kirjoittaa selkeän tiivistelmän ja tekee siitä harjoituskysymykset ja flashcards — niin opiskelet sen sijaan että luet samaa uudelleen.',
+        'Nauhoita luento, lataa PDF tai liitä YouTube-linkki. Notix litteroi sen, kirjoittaa selkeän tiivistelmän ja tekee siitä quizin ja flashcards-kortit — niin opiskelet sen sijaan että luet samaa uudelleen.',
       cta: 'Lataa App Storesta',
       ctaNote: 'Aloitus ilmaiseksi · iPhone',
     },
@@ -78,7 +80,7 @@ export const fi = {
     valueStrip: [
       { title: 'Kaikki sisään', note: 'ääni, PDF, YouTube, verkko' },
       { title: 'Muistiinpanot sekunneissa', note: 'litterointi + tiivistelmä' },
-      { title: 'Aktiivinen kertaus ulos', note: 'kysymykset, flashcards, AI-chat' },
+      { title: 'Aktiivinen kertaus ulos', note: 'quiz, flashcards, AI-chat' },
       { title: '6 kieltä', note: 'EN · ES · FR · DE · RU · PL' },
     ],
 
@@ -108,7 +110,7 @@ export const fi = {
         },
         {
           title: 'Opi se oikeasti',
-          text: 'Testaa itseäsi harjoituskysymyksillä ja flashcards-korteilla tai kysy muistiinpanoiltasi mitä vain AI-chatissa.',
+          text: 'Testaa itseäsi quizilla ja flashcards-korteilla tai kysy muistiinpanoiltasi mitä vain AI-chatissa.',
         },
       ],
     },
@@ -130,7 +132,7 @@ export const fi = {
         },
         {
           title: 'Löydä aukot ennen kuin tentti löytää',
-          text: 'Tee mistä tahansa muistiinpanosta harjoituskysymyksiä — itsensä testaaminen voittaa uudelleen lukemisen joka kerta.',
+          text: 'Tee mistä tahansa muistiinpanosta quiz-kysymyksiä — itsensä testaaminen voittaa uudelleen lukemisen joka kerta.',
         },
         {
           title: 'Jotta se jää mieleen',
@@ -146,7 +148,7 @@ export const fi = {
         },
         {
           title: 'Puhuu sinun kieltäsi',
-          text: 'Englanti, espanja, ranska, saksa, venäjä ja puola — tiivistelmät ja kysymykset tulevat valitsemallasi kielellä.',
+          text: 'Englanti, espanja, ranska, saksa, venäjä ja puola — tiivistelmät ja quizit tulevat valitsemallasi kielellä.',
         },
         {
           title: 'Jaa se PDF:nä',
@@ -179,7 +181,7 @@ export const fi = {
     whatIs: {
       title: 'Mikä Notix on?',
       paragraphs: [
-        'Notix on AI Note Taker eli tekoälyllä toimiva muistiinpanosovellus. Nauhoitat luennon, palaverin tai haastattelun, lataat PDF:n tai dokumentin tai liität linkin — YouTube-videon, artikkelin, TikTok- tai Instagram-julkaisun — ja Notix litteroi sen, kirjoittaa selkeän jäsennellyn tiivistelmän ja tekee tiivistelmästä harjoituskysymykset ja flashcards silloin kun sinun täytyy oikeasti muistaa se.',
+        'Notix on AI Note Taker eli tekoälyllä toimiva muistiinpanosovellus. Nauhoitat luennon, palaverin tai haastattelun, lataat PDF:n tai dokumentin tai liität linkin — YouTube-videon, artikkelin, TikTok- tai Instagram-julkaisun — ja Notix litteroi sen, kirjoittaa selkeän jäsennellyn tiivistelmän ja tekee tiivistelmästä quizin ja flashcards-kortit silloin kun sinun täytyy oikeasti muistaa se.',
         'Se ei ole sanelin eikä litterointityökalu. Sanelin antaa takaisin tunnin ääntä, joka pitää kuunnella uudestaan. Litterointityökalu antaa seinällisen tekstiä. Notix antaa sen, minkä olisit joka tapauksessa kirjoittanut ylös: järjestetyt muistiinpanot, joissa olennainen on erotettu täytteestä.',
         'Kaikki päätyy samaan paikkaan. Nauhoitukset, dokumentit, videot, artikkelit ja julkaisut muodostavat yhden haettavan kirjaston — kun tarvitset sen mitä maaliskuussa sanottiin, haet omista muistiinpanoistasi etkä kaiva kuutta sovellusta läpi.',
         'Notixin voi ottaa käyttöön ilmaiseksi, ja se toimii iPhonella.',
@@ -190,7 +192,7 @@ export const fi = {
 
     finalCta: {
       title: 'Älä missaa enää sitä mikä merkitsee',
-      text: 'Seuraavasta luennostasi voi tulla selkeät muistiinpanot, harjoituskysymykset ja pakka flashcards-kortteja — automaattisesti.',
+      text: 'Seuraavasta luennostasi voi tulla selkeät muistiinpanot, quiz ja pakka flashcards-kortteja — automaattisesti.',
       cta: 'Lataa App Storesta',
       note: 'Aloitus ilmaiseksi · iPhone',
     },
@@ -199,7 +201,7 @@ export const fi = {
   faq: [
     {
       q: 'Miten nauhoitan luennon ja teen siitä muistiinpanot?',
-      a: 'Notix nauhoittaa äänen, litteroi sen ja kirjoittaa automaattisesti jäsennellyn tiivistelmän — sinä käynnistät nauhoituksen ja lasket puhelimen pöydälle. Kun luento loppuu, litterointi ja tiivistelmä odottavat valmiina, ja teet niistä harjoituskysymykset tai pakan flashcards-kortteja yhdellä napautuksella. Jos sinulla on jo valmis äänitiedosto muualta, voit ladata sen sovellukseen sen sijaan että nauhoittaisit paikan päällä.',
+      a: 'Notix nauhoittaa äänen, litteroi sen ja kirjoittaa automaattisesti jäsennellyn tiivistelmän — sinä käynnistät nauhoituksen ja lasket puhelimen pöydälle. Kun luento loppuu, litterointi ja tiivistelmä odottavat valmiina, ja teet niistä quizin tai pakan flashcards-kortteja yhdellä napautuksella. Jos sinulla on jo valmis äänitiedosto muualta, voit ladata sen sovellukseen sen sijaan että nauhoittaisit paikan päällä.',
     },
     {
       q: 'Kuinka tarkasti Notix litteroi puheesta tekstiksi?',
@@ -211,7 +213,7 @@ export const fi = {
     },
     {
       q: 'Voinko tehdä muistiinpanot YouTube-videosta tai verkkoartikkelista?',
-      a: 'Kyllä. Liitä YouTube-linkki tai artikkelin osoite, niin Notix tekee siitä muistiinpanot, harjoituskysymykset ja flashcards-kortit — samalla tavalla kuin itse nauhoittamastasi äänestä. YouTube-tiivistelmät rakentuvat videon tekstityksistä, joten videota, jonka tekstitykset on poistettu käytöstä, ei vielä pysty tiivistämään.',
+      a: 'Kyllä. Liitä YouTube-linkki tai artikkelin osoite, niin Notix tekee siitä muistiinpanot, quizin ja flashcards-kortit — samalla tavalla kuin itse nauhoittamastasi äänestä. YouTube-tiivistelmät rakentuvat videon tekstityksistä, joten videota, jonka tekstitykset on poistettu käytöstä, ei vielä pysty tiivistämään.',
     },
     {
       q: 'Osaako Notix tiivistää somejulkaisuja?',
@@ -223,11 +225,11 @@ export const fi = {
     },
     {
       q: 'Toimiiko Notix ilman verkkoyhteyttä?',
-      a: 'Litterointi ja tiivistäminen tehdään palvelimillamme, joten äänen tai PDF:n muuttamiseen muistiinpanoiksi tarvitset yhteyden. Kaikki jo valmis on tallessa laitteellasi, joten muistiinpanot, tiivistelmät, harjoituskysymykset ja flashcards-kortit voi lukea ilman verkkoa — lentokoneessa tai kellarissa ilman kenttää kirjastosi on yhä paikallaan.',
+      a: 'Litterointi ja tiivistäminen tehdään palvelimillamme, joten äänen tai PDF:n muuttamiseen muistiinpanoiksi tarvitset yhteyden. Kaikki jo valmis on tallessa laitteellasi, joten muistiinpanot, tiivistelmät, quizit ja flashcards-kortit voi lukea ilman verkkoa — lentokoneessa tai kellarissa ilman kenttää kirjastosi on yhä paikallaan.',
     },
     {
       q: 'Onko Notix ilmainen?',
-      a: 'Notixin voi ottaa käyttöön ilmaiseksi: voit nauhoittaa, tehdä muistiinpanoja ja luoda harjoituskysymyksiä ja flashcards-kortteja maksamatta mitään. Notix Pro poistaa rajat — rajattomasti nauhoitustunteja, rajattomasti harjoituskysymyksiä sekä PDF- ja videotiivistelmät. Tarjolla on kuukausitilaus, jossa on 3 päivän ilmainen kokeilujakso, ja vuositilaus, jossa kokeilujakso on 7 päivää — tarkan hinnan omassa valuutassasi näet App Storesta. Mitään ei veloiteta ennen kuin kokeilujakso päättyy.',
+      a: 'Notixin voi ottaa käyttöön ilmaiseksi: voit nauhoittaa, tehdä muistiinpanoja ja luoda quizeja ja flashcards-kortteja maksamatta mitään. Notix Pro poistaa rajat — rajattomasti nauhoitustunteja, rajattomasti quiz-kysymyksiä sekä PDF- ja videotiivistelmät. Tarjolla on kuukausitilaus, jossa on 3 päivän ilmainen kokeilujakso, ja vuositilaus, jossa kokeilujakso on 7 päivää — tarkan hinnan omassa valuutassasi näet App Storesta. Mitään ei veloiteta ennen kuin kokeilujakso päättyy.',
     },
     {
       q: 'Voinko perua tilauksen milloin tahansa?',
@@ -235,7 +237,7 @@ export const fi = {
     },
     {
       q: 'Mitä kieliä Notix tukee?',
-      a: 'Sovelluksen käyttöliittymä on saatavilla englanniksi, espanjaksi, ranskaksi, saksaksi, venäjäksi ja puolaksi. Litterointi ei rajoitu näihin kuuteen — Notix ymmärtää maailman suuret kielet, ja tiivistelmät ja harjoituskysymykset tulevat sillä kielellä jonka olet valinnut, joten voit nauhoittaa yhdellä kielellä ja lukea muistiinpanot toisella.',
+      a: 'Sovelluksen käyttöliittymä on saatavilla englanniksi, espanjaksi, ranskaksi, saksaksi, venäjäksi ja puolaksi. Litterointi ei rajoitu näihin kuuteen — Notix ymmärtää maailman suuret kielet, ja tiivistelmät ja quizit tulevat sillä kielellä jonka olet valinnut, joten voit nauhoittaa yhdellä kielellä ja lukea muistiinpanot toisella.',
     },
   ],
 
