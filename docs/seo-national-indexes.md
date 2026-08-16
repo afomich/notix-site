@@ -44,7 +44,7 @@ from GSC», подтверждаешь доступ — сайт, сайтмап
 
 Приоритет высший: это не только Bing, а ещё DuckDuckGo и поисковый бэкенд ChatGPT.
 
-### 2. Yandex Webmaster
+### 2. Yandex Webmaster — ПОДТВЕРЖДЁН 2026-08-16
 
 https://webmaster.yandex.com
 
