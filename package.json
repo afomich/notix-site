@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check:faq": "node scripts/check-faq.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
