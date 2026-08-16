@@ -121,6 +121,12 @@ const languageLinks =
     {hreflangLinks.map((link) => (
       <link rel="alternate" hreflang={link.hreflang} href={link.href} />
     ))}
+    {/* Подтверждение владения для Yandex Webmaster.
+        Файловый способ здесь не работает: Cloudflare отбрасывает `.html` из пути и
+        отвечает 307 на адрес без расширения, а робот Яндекса редирект не отрабатывает
+        («The page is unavailable»). Отключить это поведение нельзя — на нём держатся
+        адреса всех страниц сайта. Мета-тег редиректов не касается вовсе. */}
+    <meta name="yandex-verification" content="3270f3699170771d" />
     <meta name="theme-color" content="#010206" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
