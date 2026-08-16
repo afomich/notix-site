@@ -91,3 +91,35 @@ export function alternates(page = '/'): { hreflang: string; path: string }[] {
   }));
   return [...links, { hreflang: 'x-default', path: localePath(DEFAULT_LOCALE, page) }];
 }
+
+/**
+ * Языковые теги браузера, которые должны считаться этой локалью.
+ *
+ * `navigator.languages` присылает то, что выставлено в системе, и это не всегда
+ * совпадает с нашим ключом: норвежская macOS шлёт `nb-NO`, а локаль у нас лежит
+ * под `no` (макроязыковой код выбран ради более широкого совпадения в выдаче).
+ * Без этой таблицы норвежец не получает подсказку вовсе.
+ */
+const BROWSER_ALIASES: Partial<Record<LocaleCode, string[]>> = {
+  no: ['nb', 'nn'],
+};
+
+/** Базовые теги (без региона), по которым локаль опознаётся у клиента. */
+export function browserTags(locale: LocaleCode): string[] {
+  const base = (value: string) => value.toLowerCase().split('-')[0];
+  return [
+    ...new Set([locale, base(LOCALES[locale].hreflang), ...(BROWSER_ALIASES[locale] ?? [])]),
+  ];
+}
+
+/**
+ * JSON для вставки через `set:html`.
+ *
+ * `set:html` не экранирует ничего, а `JSON.stringify` не трогает `<`. Строка,
+ * содержащая `</script>`, закрыла бы тег и превратила остаток JSON в разметку —
+ * то есть текст словаря стал бы исполняемым. Экранируем `<` в юникод-escape:
+ * JSON от этого не меняется, а разорвать тег больше нечем.
+ */
+export function embeddedJson(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, '\\u003c');
+}

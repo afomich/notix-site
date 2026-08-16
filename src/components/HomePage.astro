@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { type LocaleCode, dictionary } from '../i18n';
+import { type LocaleCode, dictionary, embeddedJson } from '../i18n';
 
 interface Props {
   locale: LocaleCode;
@@ -74,8 +74,8 @@ const faqSchema = {
         "url": "https://notix-ai.app/"
       }
       </script>
-    <script type="application/ld+json" set:html={JSON.stringify(appSchema)}></script>
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+    <script type="application/ld+json" set:html={embeddedJson(appSchema)}></script>
+    <script type="application/ld+json" set:html={embeddedJson(faqSchema)}></script>
   <script>
   </script>
   </Fragment>

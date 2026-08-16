@@ -1000,5 +1000,7 @@ body.nav-open .site-header { position: fixed; top: 0; left: 0; right: 0; }
   padding: 14px 0 4px;
   border-top: 1px solid var(--divider);
 }
-.nav-panel-langs a { font-size: 14px; color: var(--text-muted); min-height: 32px; }
+/* 44px — минимальная цель нажатия по рекомендациям Apple. Было 32px: в панели,
+   где ссылки идут в два столбца и вплотную, это гарантированные промахи. */
+.nav-panel-langs a { font-size: 14px; color: var(--text-muted); min-height: 44px; display: flex; align-items: center; }
 .nav-panel-langs a:hover, .nav-panel-langs a[aria-current="page"] { color: #fff; }

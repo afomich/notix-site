@@ -11,7 +11,9 @@ import {
   LOCALES,
   LOCALE_CODES,
   alternates,
+  browserTags,
   dictionary,
+  embeddedJson,
   localePath,
   type LocaleCode,
 } from '../i18n';
@@ -81,6 +83,7 @@ const languageLinks =
         // объявляет себя сразу двумя разными языками: тег из <link rel="alternate">
         // и тег из ссылки переключателя перестают совпадать.
         hreflang: LOCALES[code].hreflang,
+        tags: browserTags(code),
         name: LOCALES[code].nativeName,
         href: localePath(code, page),
         current: code === locale,
@@ -170,11 +173,12 @@ const languageLinks =
           <script
             type="application/json"
             data-lang-data
-            set:html={JSON.stringify({
+            set:html={embeddedJson({
               current: locale,
               template: t.languageBanner.text,
               locales: languageLinks.map((link) => ({
                 code: link.code,
+                tags: link.tags,
                 name: link.name,
                 href: link.href,
               })),

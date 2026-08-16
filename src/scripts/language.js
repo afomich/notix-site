@@ -19,15 +19,19 @@ if (dataEl && hint) {
     const chosen = localStorage.getItem(STORAGE_KEY);
 
     // navigator.languages идёт по убыванию предпочтения: берём первый язык,
-    // для которого у нас вообще есть страница. 'pt-BR' должен находить 'pt',
-    // поэтому сравниваем по первой части тега.
-    const preferred = (navigator.languages || [navigator.language || ''])
-      .map((tag) => String(tag).toLowerCase().split('-')[0])
-      .find((base) => locales.some((locale) => locale.code.split('-')[0] === base));
+    // для которого у нас вообще есть страница. Сравниваем по базовой части тега,
+    // чтобы 'pt-BR' находил 'pt'.
+    //
+    // Сопоставляем со списком `tags`, а не с ключом локали: они совпадают не всегда.
+    // Норвежская система шлёт `nb-NO`, а локаль лежит под `no` — по ключу совпадения
+    // не было бы, и норвежец не увидел бы подсказку вовсе.
+    const bases = (navigator.languages || [navigator.language || '']).map(
+      (tag) => String(tag).toLowerCase().split('-')[0]
+    );
 
-    const match = preferred
-      ? locales.find((locale) => locale.code.split('-')[0] === preferred)
-      : undefined;
+    const match = bases
+      .map((base) => locales.find((locale) => locale.tags.includes(base)))
+      .find(Boolean);
 
     if (match && match.code !== current && chosen !== 'dismissed' && chosen !== current) {
       hint.querySelector('[data-lang-hint-text]').textContent = template;
