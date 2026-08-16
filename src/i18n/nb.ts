@@ -31,9 +31,11 @@
  */
 import type { Dictionary } from './en';
 
+// `no`, а не `nb`: нюнорск-локали не планируется, а макроязыковой код даёт более
+// широкое совпадение в выдаче. Путь тоже /no/ — он узнаваемее для читателя.
 export const nb = {
-  path: 'nb',
-  hreflang: 'nb',
+  path: 'no',
+  hreflang: 'no',
   nativeName: 'Norsk',
 
   nav: {
