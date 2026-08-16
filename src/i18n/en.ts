@@ -263,7 +263,11 @@ export const en = {
     reportingIntro: 'To help us fix things faster, please include:',
     reportingItems: [
       'Your device model and iOS version',
-      'The app version (Settings → About)',
+      // Путь «Settings → About» отсюда убран: такого экрана в приложении нет
+      // (проверено по SettingsScreenDataBuilder и строковым ресурсам, 16.08.2026),
+      // и инструкция отправляла человека в пустоту. Отдельная задача на продукт —
+      // показывать версию в настройках; до тех пор просим её необязательной.
+      'The Notix version, if you know it',
       'What you did, what you expected, and what happened instead',
       'A screenshot or screen recording, if possible',
     ],

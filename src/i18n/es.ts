@@ -244,7 +244,7 @@ export const es = {
     reportingIntro: 'Para arreglarlo más rápido, incluye:',
     reportingItems: [
       'El modelo de tu dispositivo y la versión de iOS',
-      'La versión de la app (Ajustes → Acerca de)',
+      'La versión de Notix, si la conoces',
       'Qué hiciste, qué esperabas y qué pasó en su lugar',
       'Una captura o grabación de pantalla, si puedes',
     ],

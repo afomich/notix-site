@@ -238,7 +238,7 @@ export const de = {
     reportingIntro: 'Damit wir es schneller beheben können, schick uns bitte:',
     reportingItems: [
       'Dein Gerätemodell und die iOS-Version',
-      'Die App-Version (Einstellungen → Über die App)',
+      'Die Notix-Version, falls du sie kennst',
       'Was du getan hast, was du erwartet hast und was stattdessen passiert ist',
       'Einen Screenshot oder eine Bildschirmaufnahme, wenn möglich',
     ],
