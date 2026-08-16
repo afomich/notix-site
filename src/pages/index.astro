@@ -1,11 +1,50 @@
 ---
 import Base from '../layouts/Base.astro';
-import { FAQ_ITEMS } from '../data/faq';
+import { DEFAULT_LOCALE, dictionary } from '../i18n';
+
+const locale = DEFAULT_LOCALE;
+const d = dictionary(locale);
+const t = d.home;
+
+// Иконки не переводятся, поэтому живут здесь, а не в словаре. Порядок обязан
+// совпадать с `home.features.items`: связь между текстом и иконкой — позиционная.
+const FEATURE_ICONS = [
+  'microphone',
+  'document',
+  'play',
+  'magnifer',
+  'flashcard',
+  'chat',
+  'folder_plus',
+  'globus',
+  'export',
+];
+
+// JSON-LD собирается из словаря, а не набирается в разметке: описание приложения —
+// тот же текст, что и в мета-теге, и расхождение между ними мы уже однажды ловили
+// в FAQ. Один источник, две выдачи.
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: 'Notix: AI Note Taker & Summary',
+  url: 'https://notix-ai.app/',
+  operatingSystem: 'iOS',
+  applicationCategory: 'EducationApplication',
+  description: t.schemaDescription,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  installUrl: 'https://apps.apple.com/app/id6758561284',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Notix',
+    email: 'support@notix-ai.app',
+    url: 'https://notix-ai.app/',
+  },
+};
 
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.map((item) => ({
+  mainEntity: d.faq.map((item) => ({
     '@type': 'Question',
     name: item.q,
     acceptedAnswer: { '@type': 'Answer', text: item.a },
@@ -14,10 +53,11 @@ const faqSchema = {
 ---
 
 <Base
-  title="Notix — AI Note Taker: Record Lectures, PDFs & YouTube into Notes, Quizzes & Flashcards"
-  description="Notix turns lectures, PDFs, YouTube videos, and voice recordings into clear notes, quizzes, and flashcards. Transcribe, summarize, and chat with your notes — your AI study companion for iOS."
+  locale={locale}
+  title={t.seoTitle}
+  description={t.seoDescription}
   nav="home"
-  og={{ title: "Notix — AI Note Taker", description: "Turn lectures, PDFs, and YouTube videos into notes, quizzes, and flashcards. Chat with your notes and get exam-ready faster." }}
+  og={{ title: t.ogTitle, description: t.ogDescription }}
 >
   <Fragment slot="head">
     <script type="application/ld+json">
@@ -29,20 +69,7 @@ const faqSchema = {
         "url": "https://notix-ai.app/"
       }
       </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "MobileApplication",
-        "name": "Notix: AI Note Taker & Summary",
-        "url": "https://notix-ai.app/",
-        "operatingSystem": "iOS",
-        "applicationCategory": "EducationApplication",
-        "description": "Notix turns lectures, PDFs, YouTube videos, and voice recordings into clear notes, quizzes, and flashcards. Transcribe, summarize, and chat with your notes.",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "installUrl": "https://apps.apple.com/app/id6758561284",
-        "publisher": { "@type": "Organization", "name": "Notix", "email": "support@notix-ai.app", "url": "https://notix-ai.app/" }
-      }
-      </script>
+    <script type="application/ld+json" set:html={JSON.stringify(appSchema)}></script>
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
   <script>
   </script>
@@ -52,12 +79,12 @@ const faqSchema = {
     <section class="hero">
       <div class="hero-wrap">
         <div class="hero-text">
-          <div class="badge"><span class="badge-dot" aria-hidden="true"></span>AI study companion for iPhone</div>
-          <h1>Turn anything you're learning into notes that <em>teach you back</em></h1>
-          <p class="hero-sub">Record a lecture, upload a PDF, or paste a YouTube link. Notix transcribes it, writes a clean summary, and turns it into quizzes and flashcards — so you study instead of re-reading.</p>
+          <div class="badge"><span class="badge-dot" aria-hidden="true"></span>{t.hero.badge}</div>
+          <h1>{t.hero.titleLead} <em>{t.hero.titleEmphasis}</em></h1>
+          <p class="hero-sub">{t.hero.subtitle}</p>
           <div class="hero-cta">
-            <a class="btn-primary" href="https://apps.apple.com/app/id6758561284" data-track="app_store_click" data-placement="hero">Download on the App Store</a>
-            <span class="cta-note">Free to start · iPhone</span>
+            <a class="btn-primary" href="https://apps.apple.com/app/id6758561284" data-track="app_store_click" data-placement="hero">{t.hero.cta}</a>
+            <span class="cta-note">{t.hero.ctaNote}</span>
           </div>
         </div>
         <div class="phone-col" aria-hidden="true">
@@ -121,48 +148,38 @@ const faqSchema = {
     <!-- Value strip -->
     <section class="section-tight" data-reveal>
       <div class="container value-grid" style="padding:0">
-        <div class="value-card"><strong>Anything in</strong><span>audio, PDF, YouTube, web</span></div>
-        <div class="value-card"><strong>Notes in seconds</strong><span>transcript + clean summary</span></div>
-        <div class="value-card"><strong>Active recall out</strong><span>quizzes, flashcards, AI chat</span></div>
-        <div class="value-card"><strong>6 languages</strong><span>EN · ES · FR · DE · RU · PL</span></div>
+        {t.valueStrip.map((card) => (
+          <div class="value-card"><strong>{card.title}</strong><span>{card.note}</span></div>
+        ))}
       </div>
     </section>
 
     <!-- Pains -->
     <section class="section pains" data-reveal>
       <div class="container" style="padding:0">
-        <p class="eyebrow">Sound familiar?</p>
-        <h2>Studying feels harder than it should</h2>
+        <p class="eyebrow">{t.pains.eyebrow}</p>
+        <h2>{t.pains.title}</h2>
         <div class="pain-grid">
-          <div class="pain"><p>“I zone out twenty minutes into the lecture — and miss the half that's on the exam.”</p></div>
-          <div class="pain"><p>“I've read this chapter three times and I still can't remember any of it.”</p></div>
-          <div class="pain"><p>“My notes are scattered across two notebooks and five different apps.”</p></div>
-          <div class="pain"><p>“It's midnight before the exam, I'm confused, and there's no one to ask.”</p></div>
+          {t.pains.items.map((item) => (
+            <div class="pain"><p>{item}</p></div>
+          ))}
         </div>
-        <p class="pivot">There's a better way. Notix turns lectures, PDFs, and videos into a study system — automatically.</p>
+        <p class="pivot">{t.pains.pivot}</p>
       </div>
     </section>
 
     <!-- How it works -->
     <section class="section" id="how" data-reveal>
       <div class="container" style="padding:0">
-        <h2 class="h2-center">How it works — it's simple</h2>
+        <h2 class="h2-center">{t.how.title}</h2>
         <div class="steps">
-          <div class="step">
-            <span class="step-num">1</span>
-            <h3>Capture anything</h3>
-            <p>Record a lecture, upload audio or a document, or paste a YouTube or web link.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">2</span>
-            <h3>Notix does the work</h3>
-            <p>Automatic transcription and a clean, structured summary — ready in seconds.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">3</span>
-            <h3>Learn it for real</h3>
-            <p>Test yourself with quizzes and flashcards, or ask your notes anything with AI Chat.</p>
-          </div>
+          {t.how.steps.map((step, index) => (
+            <div class="step">
+              <span class="step-num">{index + 1}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -170,53 +187,15 @@ const faqSchema = {
     <!-- Features -->
     <section class="section" id="features" data-reveal>
       <div class="container" style="padding:0">
-        <h2 class="h2-center">Capture, understand, and remember — in one app</h2>
+        <h2 class="h2-center">{t.features.title}</h2>
         <div class="feature-grid">
-          <div class="feature">
-            <span class="im" style="--icon:url('/assets/icons/microphone.svg')" aria-hidden="true"></span>
-            <h3>Never miss a thing in class</h3>
-            <p>Tap record and stay present. The transcript and structured notes are waiting for you after the lecture.</p>
-          </div>
-          <div class="feature">
-            <span class="im" style="--icon:url('/assets/icons/document.svg')" aria-hidden="true"></span>
-            <h3>Fifty slides, one clear summary</h3>
-            <p>Drop in PDFs, slides, or articles and get a clean, structured summary in seconds.</p>
-          </div>
-          <div class="feature">
-            <span class="im" style="--icon:url('/assets/icons/play.svg')" aria-hidden="true"></span>
-            <h3>YouTube &amp; web links</h3>
-            <p>Paste a link and Notix turns the video or page into searchable notes.</p>
-          </div>
-          <div class="feature">
-            <span class="im" style="--icon:url('/assets/icons/magnifer.svg')" aria-hidden="true"></span>
-            <h3>Find your gaps before the exam does</h3>
-            <p>Turn any note into practice questions — active recall beats re-reading every time.</p>
-          </div>
-          <div class="feature">
-            <span class="im" style="--icon:url('/assets/icons/flashcard.svg')" aria-hidden="true"></span>
-            <h3>Make it stick</h3>
-            <p>Flashcards generated straight from your notes, ready for quick review anywhere.</p>
-          </div>
-          <div class="feature">
-            <span class="im" style="--icon:url('/assets/icons/chat.svg')" aria-hidden="true"></span>
-            <h3>Your notes, answering back</h3>
-            <p>Ask questions about one note or your whole library — every answer links to its source.</p>
-          </div>
-          <div class="feature">
-            <span class="im" style="--icon:url('/assets/icons/folder_plus.svg')" aria-hidden="true"></span>
-            <h3>Everything in one place</h3>
-            <p>Folders, search, and sync across devices — find any fact from any lecture in seconds.</p>
-          </div>
-          <div class="feature">
-            <span class="im" style="--icon:url('/assets/icons/globus.svg')" aria-hidden="true"></span>
-            <h3>Speaks your language</h3>
-            <p>English, Spanish, French, German, Russian, and Polish — summaries and quizzes follow your language.</p>
-          </div>
-          <div class="feature">
-            <span class="im" style="--icon:url('/assets/icons/export.svg')" aria-hidden="true"></span>
-            <h3>Share it as a PDF</h3>
-            <p>Export any note as a polished PDF for classmates or colleagues.</p>
-          </div>
+          {t.features.items.map((item, index) => (
+            <div class="feature">
+              <span class="im" style={`--icon:url('/assets/icons/${FEATURE_ICONS[index]}.svg')`} aria-hidden="true"></span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -224,23 +203,15 @@ const faqSchema = {
     <!-- Testimonials -->
     <section class="section" data-reveal>
       <div class="container" style="padding:0">
-        <h2 class="h2-center">What students say about Notix</h2>
+        <h2 class="h2-center">{t.testimonials.title}</h2>
         <div class="testimonial-grid">
-          <div class="testimonial">
-            <div class="stars" aria-hidden="true">★★★★★</div>
-            <p>“I record every lecture and Notix turns it into clean notes I actually study from. My grades went up this semester.”</p>
-            <div class="author">Maya R. · Student</div>
-          </div>
-          <div class="testimonial">
-            <div class="stars" aria-hidden="true">★★★★★</div>
-            <p>“Reviewing before exams is so much faster now. I just search my notes instead of rewatching hours of recordings.”</p>
-            <div class="author">Daniel K. · Student</div>
-          </div>
-          <div class="testimonial">
-            <div class="stars" aria-hidden="true">★★★★★</div>
-            <p>“Perfect for back-to-back classes. I tap record, focus on the lecture, and the summary is waiting for me afterwards.”</p>
-            <div class="author">Priya S. · Student</div>
-          </div>
+          {t.testimonials.items.map((item) => (
+            <div class="testimonial">
+              <div class="stars" aria-hidden="true">★★★★★</div>
+              <p>{item.quote}</p>
+              <div class="author">{item.author}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -248,20 +219,17 @@ const faqSchema = {
     <!-- What is Notix -->
     <section class="section" id="what-is-notix" data-reveal>
       <div class="faq-wrap">
-        <h2 class="h2-center">What is Notix?</h2>
-        <p>Notix is an AI note taker. You record a lecture, a meeting, or an interview, upload a PDF or a document, or paste a link — a YouTube video, an article, a TikTok or Instagram post — and Notix transcribes it, writes a clean structured summary, and turns that summary into quizzes and flashcards when you need to actually remember it.</p>
-        <p>It is not a voice recorder and it is not a transcription tool. A recorder hands you back an hour of audio you have to sit through again. A transcription tool hands you a wall of text. Notix hands you the thing you were going to write down anyway: organised notes, with the key ideas separated from the filler.</p>
-        <p>Everything lands in one place. Recordings, documents, videos, articles, and posts become a single searchable library — so when you need what was said in March, you are searching your own notes instead of hunting through six apps.</p>
-        <p>Notix is free to start and runs on iPhone.</p>
+        <h2 class="h2-center">{t.whatIs.title}</h2>
+        {t.whatIs.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       </div>
     </section>
 
     <!-- FAQ -->
     <section class="section" id="faq" data-reveal>
       <div class="faq-wrap">
-        <h2 class="h2-center">Frequently Asked Questions</h2>
+        <h2 class="h2-center">{t.faqTitle}</h2>
         <div class="faq-list">
-          {FAQ_ITEMS.map((item) => (
+          {d.faq.map((item) => (
             <details class="faq-item">
               <summary><span class="faq-q">{item.q}</span><span class="faq-c" aria-hidden="true">+</span></summary>
               <div class="faq-a"><div><p>{item.a}</p></div></div>
@@ -275,10 +243,10 @@ const faqSchema = {
     <section class="section-cta" data-reveal>
       <div class="glow-cta" aria-hidden="true"></div>
       <div class="final-cta-inner">
-        <h2>Never miss what matters again</h2>
-        <p>Your next lecture could be a set of clean notes, a quiz, and a deck of flashcards — automatically.</p>
-        <a class="btn-primary" href="https://apps.apple.com/app/id6758561284" data-track="app_store_click" data-placement="footer_cta">Download on the App Store</a>
-        <span class="cta-note">Free to start · iPhone</span>
+        <h2>{t.finalCta.title}</h2>
+        <p>{t.finalCta.text}</p>
+        <a class="btn-primary" href="https://apps.apple.com/app/id6758561284" data-track="app_store_click" data-placement="footer_cta">{t.finalCta.cta}</a>
+        <span class="cta-note">{t.finalCta.note}</span>
       </div>
     </section>
   </main>

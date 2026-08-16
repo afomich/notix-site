@@ -6,8 +6,11 @@
 // driven by props; anything page-specific that does not fit a prop goes through
 // the `head` slot.
 import '../styles/styles.css';
+import { DEFAULT_LOCALE, dictionary, localePath, type LocaleCode } from '../i18n';
 
 interface Props {
+  /** Локаль страницы. Оболочка берёт из неё nav, футер и атрибут lang. */
+  locale?: LocaleCode;
   title: string;
   description: string;
   /** 'home' adds the in-page anchors (#features, #faq); everything else in the
@@ -23,6 +26,7 @@ interface Props {
 }
 
 const {
+  locale = DEFAULT_LOCALE,
   title,
   description,
   nav = 'sub',
@@ -32,11 +36,18 @@ const {
   og,
 } = Astro.props;
 
+const t = dictionary(locale);
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// Локализованные ссылки. Examples и privacy остаются одноязычными по своим
+// нынешним путям — переводить их мы сознательно не стали, поэтому href у них
+// абсолютный и одинаковый во всех локалях.
+const homeHref = localePath(locale, '/');
+const supportHref = localePath(locale, '/support/');
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={t.hreflang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -97,7 +108,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
       <header class="site-header">
         <div class="header-inner">
-          <a class="logo" href="/">
+          <a class="logo" href={homeHref}>
             <span class="logo-mark" aria-hidden="true"></span>
             <span class="logo-name">Notix</span>
           </a>
@@ -110,28 +121,28 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
           <!-- The burger owns the nav below 640px. Everything stays in one <nav>:
                the panel is the same list, re-laid-out by CSS, so there is no second
                copy of the links to keep in sync. -->
-          <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false"
+          <button class="nav-burger" type="button" aria-label={t.nav.menu} aria-expanded="false"
                   aria-controls="site-nav" data-burger>
             <span></span><span></span><span></span>
           </button>
           <nav class="site-nav" id="site-nav" data-desktop-nav>
             {nav === 'home' && (
               <>
-                <a href="#features" class="nav-hide-mobile">Features</a>
-                <a href="#faq" class="nav-hide-mobile">FAQ</a>
+                <a href="#features" class="nav-hide-mobile">{t.nav.features}</a>
+                <a href="#faq" class="nav-hide-mobile">{t.nav.faq}</a>
               </>
             )}
             <a href="/examples/" aria-current={current === 'examples' ? 'page' : undefined}
-              >Examples</a
+              >{t.nav.examples}</a
             >
-            <a href="/support/" aria-current={current === 'support' ? 'page' : undefined}
-              >Support</a
+            <a href={supportHref} aria-current={current === 'support' ? 'page' : undefined}
+              >{t.nav.support}</a
             >
             <a
               class="pill-btn"
               href="https://apps.apple.com/app/id6758561284"
               data-track="app_store_click"
-              data-placement="nav">Get the app</a
+              data-placement="nav">{t.nav.getApp}</a
             >
           </nav>
         </div>
@@ -150,24 +161,24 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
               the mobile menu would leave the sections unreachable on a phone. */}
           {nav === 'home' && (
             <>
-              <a href="#features">Features</a>
-              <a href="#faq">FAQ</a>
+              <a href="#features">{t.nav.features}</a>
+              <a href="#faq">{t.nav.faq}</a>
             </>
           )}
-          <a href="/examples/">Examples</a>
-          <a href="/support/">Support</a>
+          <a href="/examples/">{t.nav.examples}</a>
+          <a href={supportHref}>{t.nav.support}</a>
           <a
             class="btn-primary nav-panel-cta"
             href="https://apps.apple.com/app/id6758561284"
             data-track="app_store_click"
-            data-placement="mobile_nav">Get the app</a
+            data-placement="mobile_nav">{t.nav.getApp}</a
           >
           <div class="nav-panel-foot">
             <div>
-              <a href="/privacy/">Privacy Policy</a>
+              <a href="/privacy/">{t.footer.privacy}</a>
               <a href="mailto:support@notix-ai.app">support@notix-ai.app</a>
             </div>
-            <span>© 2026 Notix</span>
+            <span>{t.footer.copyright}</span>
           </div>
         </div>
       </div>
@@ -177,12 +188,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       <footer class="site-footer">
         <div class="footer-inner">
           <div class="footer-links">
-            <a href="/examples/">Examples</a>
-            <a href="/support/">Support</a>
-            <a href="/privacy/">Privacy Policy</a>
+            <a href="/examples/">{t.nav.examples}</a>
+            <a href={supportHref}>{t.nav.support}</a>
+            <a href="/privacy/">{t.footer.privacy}</a>
             <a href="mailto:support@notix-ai.app">support@notix-ai.app</a>
           </div>
-          <div class="footer-copy">© 2026 Notix</div>
+          <div class="footer-copy">{t.footer.copyright}</div>
         </div>
       </footer>
     </div>

@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
+    "check:types": "astro check",
     "check:faq": "node scripts/check-faq.mjs",
     "preview": "astro preview",
     "astro": "astro"
@@ -18,6 +19,8 @@
     "astro": "^7.1.6"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3",
     "wrangler": "^4.118.0"
   }
 }
