@@ -76,6 +76,11 @@ const languageLinks =
   page && LOCALE_CODES.length > 1
     ? LOCALE_CODES.map((code) => ({
         code,
+        // Языковой тег, а не ключ локали: у /pt/ это pt-BR, у /zh/ — zh-Hant.
+        // Ключ живёт в URL, тег — в разметке. Если их перепутать, страница
+        // объявляет себя сразу двумя разными языками: тег из <link rel="alternate">
+        // и тег из ссылки переключателя перестают совпадать.
+        hreflang: LOCALES[code].hreflang,
         name: LOCALES[code].nativeName,
         href: localePath(code, page),
         current: code === locale,
@@ -220,7 +225,7 @@ const languageLinks =
                 <ul class="lang-list">
                   {languageLinks.map((link) => (
                     <li>
-                      <a href={link.href} hreflang={link.code} lang={link.code}
+                      <a href={link.href} hreflang={link.hreflang} lang={link.hreflang}
                          aria-current={link.current ? 'page' : undefined}>{link.name}</a>
                     </li>
                   ))}
@@ -267,7 +272,7 @@ const languageLinks =
               {/* На телефоне переключателя в шапке нет — он здесь, иначе языки
                   становятся недостижимы на самом частом устройстве. */}
               {languageLinks.map((link) => (
-                <a href={link.href} hreflang={link.code} lang={link.code}
+                <a href={link.href} hreflang={link.hreflang} lang={link.hreflang}
                    aria-current={link.current ? 'page' : undefined}>{link.name}</a>
               ))}
             </div>
