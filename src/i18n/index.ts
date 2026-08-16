@@ -28,6 +28,7 @@ import { cs } from './cs';
 import { ro } from './ro';
 import { el } from './el';
 import { fi } from './fi';
+import { hu } from './hu';
 import type { Dictionary } from './en';
 
 export type { Dictionary };
@@ -55,6 +56,7 @@ export const LOCALES = {
   ro,
   el,
   fi,
+  hu,
 } satisfies Record<string, Dictionary>;
 
 export type LocaleCode = keyof typeof LOCALES;
