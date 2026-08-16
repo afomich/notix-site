@@ -1,0 +1,14 @@
+---
+import SupportPage from '../../components/SupportPage.astro';
+import { DEFAULT_LOCALE, LOCALE_CODES, type LocaleCode } from '../../i18n';
+
+export function getStaticPaths() {
+  return LOCALE_CODES.filter((code) => code !== DEFAULT_LOCALE).map((code) => ({
+    params: { locale: code },
+  }));
+}
+
+const locale = Astro.params.locale as LocaleCode;
+---
+
+<SupportPage locale={locale} />

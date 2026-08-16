@@ -11,6 +11,7 @@
     "build": "astro check && astro build",
     "check:types": "astro check",
     "check:faq": "node scripts/check-faq.mjs",
+    "check:hreflang": "node scripts/check-hreflang.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

@@ -9,6 +9,7 @@
  * Существующие URL проиндексированы и меняться не должны.
  */
 import { en } from './en';
+import { ru } from './ru';
 import type { Dictionary } from './en';
 
 export type { Dictionary };
@@ -17,6 +18,7 @@ export const DEFAULT_LOCALE = 'en';
 
 export const LOCALES = {
   en,
+  ru,
 } satisfies Record<string, Dictionary>;
 
 export type LocaleCode = keyof typeof LOCALES;

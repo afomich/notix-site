@@ -908,3 +908,97 @@ body.nav-open .site-header { position: fixed; top: 0; left: 0; right: 0; }
    wide is prose nobody finishes. */
 .page-main.ex-wide { max-width: 1080px; }
 .ex-wide .ex-lede { max-width: 640px; }
+
+/* --- Переключатель языка и подсказка ------------------------------------- */
+
+/* <details> вместо JS-выпадашки: список языков — это настоящие ссылки, по которым
+   краулер проходит, и меню работает даже когда скрипты не загрузились. */
+.lang-switch { position: relative; }
+.lang-switch > summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--text-nav);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  /* 48px по вертикали — минимальная цель нажатия. */
+  min-height: 48px;
+}
+.lang-switch > summary::-webkit-details-marker { display: none; }
+.lang-switch > summary::after {
+  content: "";
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+}
+.lang-switch[open] > summary, .lang-switch > summary:hover { color: #fff; }
+
+.lang-list {
+  position: absolute;
+  top: calc(100% - 8px);
+  right: 0;
+  z-index: 30;
+  min-width: 180px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 8px;
+  list-style: none;
+  background: #0a0d18;
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+}
+.lang-list a {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-size: 14px;
+  color: var(--text-nav);
+}
+.lang-list a:hover { color: #fff; background: var(--glass); }
+.lang-list a[aria-current="page"] { color: #fff; background: var(--glass-dim); }
+
+.lang-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 20;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--text-quote);
+  background: rgba(13, 95, 255, 0.14);
+  border-bottom: 1px solid var(--glass-border-dim);
+}
+.lang-hint[hidden] { display: none; }
+.lang-hint a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.lang-hint button {
+  background: none;
+  border: 0;
+  color: var(--text-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+}
+.lang-hint button:hover { color: #fff; }
+
+@media (max-width: 640px) {
+  /* Шапка ниже 640px принадлежит бургеру, поэтому переключатель уезжает в панель. */
+  .lang-switch { display: none; }
+}
+
+.nav-panel-langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  padding: 14px 0 4px;
+  border-top: 1px solid var(--divider);
+}
+.nav-panel-langs a { font-size: 14px; color: var(--text-muted); min-height: 32px; }
+.nav-panel-langs a:hover, .nav-panel-langs a[aria-current="page"] { color: #fff; }

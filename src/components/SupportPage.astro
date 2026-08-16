@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import { type LocaleCode, dictionary } from '../i18n';
+
+interface Props {
+  locale: LocaleCode;
+}
+
+const { locale } = Astro.props;
+const t = dictionary(locale).support;
+---
+
+<Base
+  locale={locale}
+  page="/support/"
+  title={t.seoTitle}
+  description={t.seoDescription}
+  current="support"
+>
+  <main class="page-main">
+    <h1>{t.title}</h1>
+    <p class="updated">{t.replyTime}</p>
+
+    <div class="contact-card">
+      <strong>{t.contactCardTitle}</strong>
+      <p>{t.contactCardText}<br>
+      <a href="mailto:support@notix-ai.app">support@notix-ai.app</a></p>
+    </div>
+
+    <h2>{t.reportingTitle}</h2>
+    <p>{t.reportingIntro}</p>
+    <ul>
+      {t.reportingItems.map((item) => <li>{item}</li>)}
+    </ul>
+
+    <h2>{t.billingTitle}</h2>
+    <p>{t.billingTextLead} <strong>{t.billingSettingsPath}</strong>.</p>
+    <p>{t.billingRefundsLead} <a href="https://reportaproblem.apple.com" rel="noopener">reportaproblem.apple.com</a>.</p>
+
+    <h2>{t.accountTitle}</h2>
+    <p>{t.accountTextLead} <strong>{t.accountSettingsPath}</strong>. {t.accountTextTail}</p>
+    <p>{t.accountPrivacyLead} <a href="/privacy/">{t.accountPrivacyLink}</a> {t.accountPrivacyTail}</p>
+
+    <h2>{t.recordingTitle}</h2>
+    <p>{t.recordingText}</p>
+  </main>
+
+
+</Base>

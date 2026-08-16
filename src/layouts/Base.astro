@@ -6,11 +6,27 @@
 // driven by props; anything page-specific that does not fit a prop goes through
 // the `head` slot.
 import '../styles/styles.css';
-import { DEFAULT_LOCALE, dictionary, localePath, type LocaleCode } from '../i18n';
+import {
+  DEFAULT_LOCALE,
+  LOCALES,
+  LOCALE_CODES,
+  alternates,
+  dictionary,
+  localePath,
+  type LocaleCode,
+} from '../i18n';
 
 interface Props {
   /** Локаль страницы. Оболочка берёт из неё nav, футер и атрибут lang. */
   locale?: LocaleCode;
+  /**
+   * Логический путь страницы без префикса локали: '/' или '/support/'.
+   * Задан — страница получает матрицу hreflang и переключатель языка.
+   * Не задан — страница считается одноязычной (examples, privacy, 404,
+   * reset-password), и альтернатив у неё нет: разметка не должна обещать
+   * переводы, которых нет.
+   */
+  page?: string;
   title: string;
   description: string;
   /** 'home' adds the in-page anchors (#features, #faq); everything else in the
@@ -27,6 +43,7 @@ interface Props {
 
 const {
   locale = DEFAULT_LOCALE,
+  page,
   title,
   description,
   nav = 'sub',
@@ -44,6 +61,26 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 // абсолютный и одинаковый во всех локалях.
 const homeHref = localePath(locale, '/');
 const supportHref = localePath(locale, '/support/');
+
+// hreflang и переключатель есть только у страниц, которые действительно переведены.
+// Группа обязана быть симметричной — если A ссылается на B, B ссылается на A, —
+// поэтому список строится из одного источника и одинаков на всех страницах группы.
+const hreflangLinks = page && LOCALE_CODES.length > 1
+  ? alternates(page).map((link) => ({
+      hreflang: link.hreflang,
+      href: new URL(link.path, Astro.site).href,
+    }))
+  : [];
+
+const languageLinks =
+  page && LOCALE_CODES.length > 1
+    ? LOCALE_CODES.map((code) => ({
+        code,
+        name: LOCALES[code].nativeName,
+        href: localePath(code, page),
+        current: code === locale,
+      }))
+    : [];
 ---
 
 <!doctype html>
@@ -73,6 +110,9 @@ const supportHref = localePath(locale, '/support/');
       </>
     )}
     <link rel="canonical" href={canonical} />
+    {hreflangLinks.map((link) => (
+      <link rel="alternate" hreflang={link.hreflang} href={link.href} />
+    ))}
     <meta name="theme-color" content="#010206" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -92,6 +132,7 @@ const supportHref = localePath(locale, '/support/');
       // site.js now carries the header burger, which every page has — so it loads
       // from the shell rather than from the two pages that happened to need it.
       import '../scripts/site.js';
+      import '../scripts/language.js';
     </script>
   </head>
 
@@ -105,6 +146,34 @@ const supportHref = localePath(locale, '/support/');
         <div class="glow-a"></div>
         <div class="glow-b"></div>
       </div>
+
+      {languageLinks.length > 0 && (
+        <>
+          {/* Полоска-подсказка вместо серверного редиректа: она не меняет содержимое
+              страницы, поэтому краулер видит ровно то же, что человек, и ни одна
+              локаль не превращается в дубль. */}
+          <div class="lang-hint" data-lang-hint hidden>
+            <span data-lang-hint-text></span>
+            <a data-lang-hint-cta href="/">{t.languageBanner.cta}</a>
+            <button type="button" data-lang-hint-dismiss aria-label={t.languageBanner.dismiss}
+              >×</button
+            >
+          </div>
+          <script
+            type="application/json"
+            data-lang-data
+            set:html={JSON.stringify({
+              current: locale,
+              template: t.languageBanner.text,
+              locales: languageLinks.map((link) => ({
+                code: link.code,
+                name: link.name,
+                href: link.href,
+              })),
+            })}
+          />
+        </>
+      )}
 
       <header class="site-header">
         <div class="header-inner">
@@ -138,6 +207,23 @@ const supportHref = localePath(locale, '/support/');
             <a href={supportHref} aria-current={current === 'support' ? 'page' : undefined}
               >{t.nav.support}</a
             >
+            {languageLinks.length > 0 && (
+              <details class="lang-switch">
+                <summary aria-label={t.nav.language}>
+                  <span class="lang-current">{dictionary(locale).nativeName}</span>
+                </summary>
+                {/* Настоящие ссылки, а не JS-выпадашка: краулер должен пройти по ним
+                    и обнаружить локали — иначе половина смысла hreflang теряется. */}
+                <ul class="lang-list">
+                  {languageLinks.map((link) => (
+                    <li>
+                      <a href={link.href} hreflang={link.code} lang={link.code}
+                         aria-current={link.current ? 'page' : undefined}>{link.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
             <a
               class="pill-btn"
               href="https://apps.apple.com/app/id6758561284"
@@ -173,6 +259,16 @@ const supportHref = localePath(locale, '/support/');
             data-track="app_store_click"
             data-placement="mobile_nav">{t.nav.getApp}</a
           >
+          {languageLinks.length > 0 && (
+            <div class="nav-panel-langs">
+              {/* На телефоне переключателя в шапке нет — он здесь, иначе языки
+                  становятся недостижимы на самом частом устройстве. */}
+              {languageLinks.map((link) => (
+                <a href={link.href} hreflang={link.code} lang={link.code}
+                   aria-current={link.current ? 'page' : undefined}>{link.name}</a>
+              ))}
+            </div>
+          )}
           <div class="nav-panel-foot">
             <div>
               <a href="/privacy/">{t.footer.privacy}</a>

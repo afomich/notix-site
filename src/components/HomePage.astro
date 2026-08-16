@@ -1,0 +1,260 @@
+---
+import Base from '../layouts/Base.astro';
+import { type LocaleCode, dictionary } from '../i18n';
+
+interface Props {
+  locale: LocaleCode;
+}
+
+const { locale } = Astro.props;
+const d = dictionary(locale);
+const t = d.home;
+
+// Иконки не переводятся, поэтому живут здесь, а не в словаре. Порядок обязан
+// совпадать с `home.features.items`: связь между текстом и иконкой — позиционная.
+const FEATURE_ICONS = [
+  'microphone',
+  'document',
+  'play',
+  'magnifer',
+  'flashcard',
+  'chat',
+  'folder_plus',
+  'globus',
+  'export',
+];
+
+// JSON-LD собирается из словаря, а не набирается в разметке: описание приложения —
+// тот же текст, что и в мета-теге, и расхождение между ними мы уже однажды ловили
+// в FAQ. Один источник, две выдачи.
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: 'Notix: AI Note Taker & Summary',
+  url: 'https://notix-ai.app/',
+  operatingSystem: 'iOS',
+  applicationCategory: 'EducationApplication',
+  description: t.schemaDescription,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  installUrl: 'https://apps.apple.com/app/id6758561284',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Notix',
+    email: 'support@notix-ai.app',
+    url: 'https://notix-ai.app/',
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: d.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<Base
+  locale={locale}
+  page="/"
+  title={t.seoTitle}
+  description={t.seoDescription}
+  nav="home"
+  og={{ title: t.ogTitle, description: t.ogDescription }}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Notix — AI Note Taker",
+        "alternateName": "Notix",
+        "url": "https://notix-ai.app/"
+      }
+      </script>
+    <script type="application/ld+json" set:html={JSON.stringify(appSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+  <script>
+  </script>
+  </Fragment>
+  <main class="z1">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-wrap">
+        <div class="hero-text">
+          <div class="badge"><span class="badge-dot" aria-hidden="true"></span>{t.hero.badge}</div>
+          <h1>{t.hero.titleLead} <em>{t.hero.titleEmphasis}</em></h1>
+          <p class="hero-sub">{t.hero.subtitle}</p>
+          <div class="hero-cta">
+            <a class="btn-primary" href="https://apps.apple.com/app/id6758561284" data-track="app_store_click" data-placement="hero">{t.hero.cta}</a>
+            <span class="cta-note">{t.hero.ctaNote}</span>
+          </div>
+        </div>
+        <div class="phone-col" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-island"></div>
+              <div class="phone-status">
+                <span>9:41</span>
+                <span class="phone-status-right">
+                  <span class="signal"><span style="height:4px"></span><span style="height:6px"></span><span style="height:8px"></span><span style="height:10px"></span></span>
+                  <span class="battery"><span></span></span>
+                </span>
+              </div>
+              <div class="phone-title-row">
+                <span class="phone-title">My notes</span>
+                <span class="im" style="--icon:url('/assets/icons/menu_dots_circle.svg');width:24px;height:24px;background:#D8D8D8"></span>
+              </div>
+              <div class="phone-chips">
+                <div class="chip">
+                  <span class="im" style="--icon:url('/assets/icons/folder.svg');width:17px;height:17px;background:#A5BDFF"></span>
+                  <span class="chip-text"><span class="chip-name">All notes</span><span class="chip-meta">12 notes</span></span>
+                </div>
+                <div class="chip selected">
+                  <span class="im" style="--icon:url('/assets/icons/folder.svg');width:17px;height:17px;background:#A5BDFF"></span>
+                  <span class="chip-text"><span class="chip-name">Chem 201</span><span class="chip-meta">7 notes</span></span>
+                </div>
+              </div>
+              <div class="phone-list">
+                <span class="phone-section">Today</span>
+                <div class="note-card">
+                  <span class="im" style="--icon:url('/assets/icons/play.svg');width:19px;height:19px;background:#A5BDFF"></span>
+                  <span class="note-text"><span class="note-title">Organic Chemistry — Alkenes</span><span class="note-meta">47 min</span></span>
+                </div>
+                <div class="note-card">
+                  <span class="im" style="--icon:url('/assets/icons/document.svg');width:19px;height:19px;background:#A5BDFF"></span>
+                  <span class="note-text"><span class="note-title">Macroeconomics ch. 4 — Inflation</span><span class="note-meta">10:34</span></span>
+                </div>
+                <span class="phone-section">Previous 30 days</span>
+                <div class="note-card">
+                  <span class="im" style="--icon:url('/assets/icons/play.svg');width:19px;height:19px;background:#A5BDFF"></span>
+                  <span class="note-text"><span class="note-title">Seminar — Constitutional law</span><span class="note-meta">27 Jan 2026, 52 min</span></span>
+                </div>
+                <div class="note-card">
+                  <span class="im" style="--icon:url('/assets/icons/document.svg');width:19px;height:19px;background:#A5BDFF"></span>
+                  <span class="note-text"><span class="note-title">The Krebs cycle, explained</span><span class="note-meta">27 Jan 2026</span></span>
+                </div>
+              </div>
+              <div class="phone-nav">
+                <span class="im" style="--icon:url('/assets/icons/magnifer.svg');width:21px;height:21px;background:#D8D8D8"></span>
+                <span class="im" style="--icon:url('/assets/icons/chat.svg');width:21px;height:21px;background:#D8D8D8"></span>
+                <span class="phone-fab">+</span>
+                <span class="im" style="--icon:url('/assets/icons/folder_plus.svg');width:21px;height:21px;background:#D8D8D8"></span>
+                <span class="im" style="--icon:url('/assets/icons/settings.svg');width:21px;height:21px;background:#D8D8D8"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value strip -->
+    <section class="section-tight" data-reveal>
+      <div class="container value-grid" style="padding:0">
+        {t.valueStrip.map((card) => (
+          <div class="value-card"><strong>{card.title}</strong><span>{card.note}</span></div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Pains -->
+    <section class="section pains" data-reveal>
+      <div class="container" style="padding:0">
+        <p class="eyebrow">{t.pains.eyebrow}</p>
+        <h2>{t.pains.title}</h2>
+        <div class="pain-grid">
+          {t.pains.items.map((item) => (
+            <div class="pain"><p>{item}</p></div>
+          ))}
+        </div>
+        <p class="pivot">{t.pains.pivot}</p>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" id="how" data-reveal>
+      <div class="container" style="padding:0">
+        <h2 class="h2-center">{t.how.title}</h2>
+        <div class="steps">
+          {t.how.steps.map((step, index) => (
+            <div class="step">
+              <span class="step-num">{index + 1}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="features" data-reveal>
+      <div class="container" style="padding:0">
+        <h2 class="h2-center">{t.features.title}</h2>
+        <div class="feature-grid">
+          {t.features.items.map((item, index) => (
+            <div class="feature">
+              <span class="im" style={`--icon:url('/assets/icons/${FEATURE_ICONS[index]}.svg')`} aria-hidden="true"></span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" data-reveal>
+      <div class="container" style="padding:0">
+        <h2 class="h2-center">{t.testimonials.title}</h2>
+        <div class="testimonial-grid">
+          {t.testimonials.items.map((item) => (
+            <div class="testimonial">
+              <div class="stars" aria-hidden="true">★★★★★</div>
+              <p>{item.quote}</p>
+              <div class="author">{item.author}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- What is Notix -->
+    <section class="section" id="what-is-notix" data-reveal>
+      <div class="faq-wrap">
+        <h2 class="h2-center">{t.whatIs.title}</h2>
+        {t.whatIs.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" data-reveal>
+      <div class="faq-wrap">
+        <h2 class="h2-center">{t.faqTitle}</h2>
+        <div class="faq-list">
+          {d.faq.map((item) => (
+            <details class="faq-item">
+              <summary><span class="faq-q">{item.q}</span><span class="faq-c" aria-hidden="true">+</span></summary>
+              <div class="faq-a"><div><p>{item.a}</p></div></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section-cta" data-reveal>
+      <div class="glow-cta" aria-hidden="true"></div>
+      <div class="final-cta-inner">
+        <h2>{t.finalCta.title}</h2>
+        <p>{t.finalCta.text}</p>
+        <a class="btn-primary" href="https://apps.apple.com/app/id6758561284" data-track="app_store_click" data-placement="footer_cta">{t.finalCta.cta}</a>
+        <span class="cta-note">{t.finalCta.note}</span>
+      </div>
+    </section>
+  </main>
+
+  
+</Base>
