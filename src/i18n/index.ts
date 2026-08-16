@@ -22,6 +22,7 @@ import { pt } from './pt';
 import { sv } from './sv';
 import { uk } from './uk';
 import { tr } from './tr';
+import { da } from './da';
 import type { Dictionary } from './en';
 
 export type { Dictionary };
@@ -43,6 +44,7 @@ export const LOCALES = {
   sv,
   uk,
   tr,
+  da,
 } satisfies Record<string, Dictionary>;
 
 export type LocaleCode = keyof typeof LOCALES;
