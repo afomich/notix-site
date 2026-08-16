@@ -15,10 +15,9 @@ export type FaqItem = {
 };
 
 export const FAQ_ITEMS: FaqItem[] = [
-  {
-    q: 'What is Notix?',
-    a: 'Notix is an AI note taker. It records conversations, lectures, and meetings, transcribes them, and writes structured summaries — and it does the same with documents you upload and links you paste: PDFs, Word files, spreadsheets, YouTube videos, web articles, and social posts. Any summary can be turned into quizzes and flashcards when the material is something you need to retain. Notix is free to start, with a Pro plan for heavier use, and is available on iPhone.',
-  },
+  // «What is Notix?» здесь намеренно нет: на него отвечает отдельная секция
+  // #what-is-notix прямо над FAQ. Два блока с одним заголовком подряд — шум
+  // и для читателя, и для поисковика.
   {
     q: 'How do I record something and turn it into notes?',
     a: 'Notix records the audio, transcribes it, and writes a structured summary automatically — you start the recording and put your phone down. When it ends, the transcript and the summary are waiting, and you can generate a quiz or a flashcard deck from them in one tap. If you already have an audio file from somewhere else, you can upload that instead of recording live.',
